@@ -14,7 +14,8 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <script src="js/protectedPath.js"></script>
-    <!--Chequeo de user logueado -->
+    <!-- Script de logica de login -->
+    <script src="js/loginLogic.js"></script>
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -58,7 +59,12 @@
             <li class="nav-item">
               <a class="nav-link" href="sell.html">Vender</a>
             </li>
-            <li class="nav-item"></li>
+            <!-- Nav item que muestra username ingresado en login -->
+            <li class="nav-item">
+              <a class="nav-link" href="my-profile.html"
+                ><span id="displayUsername"></span
+              ></a>
+            </li>
           </ul>
         </div>
       </div>
