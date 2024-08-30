@@ -193,13 +193,38 @@ a.custom-card:hover {
   background-color: rgb(231, 231, 231);
   margin-left: 20%;
   margin-right: 20%;
-  margin-bottom: 70px;
+  margin-bottom: 10%;
   border-radius: 20px;
+  text-align: justify;
+}
+
+@media (max-width: 1000px){
+  #divJS{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 15%;
+    padding-top: 5%;
+  }
+}
+
+@media (max-width: 767px){
+  #divJS{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 15%;
+    padding-top: 5%;
+  }
 }
 
 p#imagen{
   text-align: center;
-  padding-top: 20px;
+  padding-top: 5%;
+}
+
+@media (max-width: 767px){
+  p#imagen{
+    display: none;
+  }
 }
 
 p#nombre{
@@ -207,7 +232,7 @@ p#nombre{
   text-decoration: underline;
   text-align: center;
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 21px;
+  font-size: 3em;
 }
 
 p#descripcion{
@@ -215,7 +240,7 @@ p#descripcion{
   margin-left: 20%;
   margin-right: 20%;
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 19px;
+  font-size: 2em;
 }
 
 p#precio{
@@ -226,9 +251,19 @@ p#precio{
   color: rgb(61, 61, 61);
   padding-bottom: 20px;
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 18px;
+  font-size: 1.5em;
   float: left;
   text-decoration: underline;
+}
+
+@media (max-width: 767px){
+  p#precio{
+    float: none;
+    text-align: center;
+    font-size: 1.5em;
+    margin: auto;
+    padding-bottom: 0px;
+  }
 }
 
 p#vendidos{
@@ -239,6 +274,16 @@ p#vendidos{
   color: rgb(61, 61, 61);
   padding-bottom: 20px;
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 18px;
+  font-size: 1.5em;
   text-decoration: underline;
 }
+
+@media (max-width: 767px){
+  p#vendidos{
+    float: none;
+    text-align: center;
+    font-size: 1.5em;
+    margin: auto;
+  }
+}
+
