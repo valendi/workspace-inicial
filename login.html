@@ -1,18 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>eMercado - Inicio de Sesión</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap"
-    />
-    <!-- Script de logica de login -->
-    <script src="js/loginLogic.js"></script>
-    <style>
-      html,
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>eMercado - Inicio de Sesión</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" />
+  <style>
+ html,
       body {
         height: 100%;
         margin: 0;
@@ -175,73 +169,46 @@
         .forgot-password a {
           font-size: 1rem;
         }
-      }
-    </style>
-  </head>
-
-  <body>
-    <main>
-      <div class="login-container">
-        <h2>¡Qué gusto encontrarte aquí otra vez, iniciemos sesión!</h2>
-        <form
-          id="loginForm"
-          onsubmit="return validateForm()"
-          action="#"
-          method="POST"
-        >
-          <label for="username">Usuario</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Ingresa tu usuario"
-            required
-          />
-          <label for="password">Contraseña</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Ingresa tu contraseña"
-            required
-          />
-          <div class="remember-me">
-            <input type="checkbox" id="remember" name="remember" />
-            <label for="remember">Recuérdame</label>
-          </div>
-          <button type="submit">Ingresar</button>
-          <div class="forgot-password">
-            <a href="#">¿Olvidaste tu contraseña?</a>
-          </div>
-        </form>
-      </div>
-    </main>
-    <footer>
-        <p>
-            Este sitio forma parte de
-            <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
-        </p>
-      <p>
-        Este sitio forma parte de
-        <a href="https://jovenesaprogramar.edu.uy/" target="_blank"
-          >Jovenes a Programar</a
-        >
-      </p>
-    </footer>
-
-    <script>
-      function validateForm() {
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
-
-        if (username === "" || password === "") {
-          alert("Por favor, completa todos los campos.");
-          return false;
-        } else {
-          window.location.href = "index.html";
-          return false;
-        }
-      }
-    </script>
-  </body>
+      }  </style>
+</head>
+<body>
+  <main>
+    <div class="login-container">
+      <h2>¡Qué gusto encontrarte aquí otra vez, iniciemos sesión!</h2>
+      <form id="loginForm">
+        <label for="username">Usuario</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Ingresa tu usuario"
+          required
+        />
+        <label for="password">Contraseña</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Ingresa tu contraseña"
+          required
+        />
+        <div class="remember-me">
+          <input type="checkbox" id="remember" name="remember" />
+          <label for="remember">Recuérdame</label>
+        </div>
+        <button type="submit">Ingresar</button>
+        <div class="forgot-password">
+          <a href="#">¿Olvidaste tu contraseña?</a>
+        </div>
+      </form>
+    </div>
+  </main>
+  <footer>
+    <p>
+      Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
+    </p>
+  </footer>
+  <script src="js/loginLogic.js"></script>
+</body>
 </html>
+
