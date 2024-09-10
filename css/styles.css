@@ -189,7 +189,7 @@ a.custom-card:hover {
   color: orange;
 }
 
-#divJS{
+#divJS {
   background-color: rgb(231, 231, 231);
   margin-left: 20%;
   margin-right: 20%;
@@ -198,8 +198,8 @@ a.custom-card:hover {
   text-align: justify;
 }
 
-@media (max-width: 1000px){
-  #divJS{
+@media (max-width: 1000px) {
+  #divJS {
     margin-left: 10%;
     margin-right: 10%;
     margin-bottom: 15%;
@@ -207,8 +207,8 @@ a.custom-card:hover {
   }
 }
 
-@media (max-width: 767px){
-  #divJS{
+@media (max-width: 767px) {
+  #divJS {
     margin-left: 5%;
     margin-right: 5%;
     margin-bottom: 15%;
@@ -216,48 +216,48 @@ a.custom-card:hover {
   }
 }
 
-p#imagen{
+p#imagen {
   text-align: center;
   padding-top: 5%;
 }
 
-@media (max-width: 767px){
-  p#imagen{
+@media (max-width: 767px) {
+  p#imagen {
     display: none;
   }
 }
 
-p#nombre{
+p#nombre {
   font-weight: bold;
   text-decoration: underline;
   text-align: center;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 3em;
 }
 
-p#descripcion{
+p#descripcion {
   text-align: center;
   margin-left: 20%;
   margin-right: 20%;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 2em;
 }
 
-p#precio{
+p#precio {
   text-align: left;
   margin-left: 10%;
   font-style: italic;
   font-weight: bold;
   color: rgb(61, 61, 61);
   padding-bottom: 20px;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 1.5em;
   float: left;
   text-decoration: underline;
 }
 
-@media (max-width: 767px){
-  p#precio{
+@media (max-width: 767px) {
+  p#precio {
     float: none;
     text-align: center;
     font-size: 1.5em;
@@ -266,20 +266,20 @@ p#precio{
   }
 }
 
-p#vendidos{
+p#vendidos {
   text-align: right;
   margin-right: 10%;
   font-style: italic;
   font-weight: bold;
   color: rgb(61, 61, 61);
   padding-bottom: 20px;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 1.5em;
   text-decoration: underline;
 }
 
-@media (max-width: 767px){
-  p#vendidos{
+@media (max-width: 767px) {
+  p#vendidos {
     float: none;
     text-align: center;
     font-size: 1.5em;
@@ -287,3 +287,16 @@ p#vendidos{
   }
 }
 
+#searchInput {
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('../img/searchbaricon.svg');
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: auto;
+  padding: 7px 20px 7px 40px;
+}
