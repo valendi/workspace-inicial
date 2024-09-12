@@ -45,6 +45,37 @@
   <div class="container"> <!-- Contenedor para cuadro de busqueda -->
     <input type="search" id="searchInput" placeholder="Search..." size="5" name="q" class="form-control">
   </div>
+  <div class="d-flex justify-content-end mb-3">
+    <span class="me-2">Precio</span>
+  <!-- Filtros de rango de precio -->
+  <div class="d-flex align-items-center me-3">
+    <div class="input-group input-group-sm" style="width: 100px;">
+      <input type="number" id="minPrecio" class="form-control" placeholder="Min" />
+    </div>
+    <div class="input-group input-group-sm ms-2" style="width: 100px;">
+      <input type="number" id="maxPrecio" class="form-control" placeholder="Max" />
+    </div>
+    <button id="filterBtn" class="btn btn-primary btn-sm ms-2">Filtrar</button>
+  </div>
+
+  <!-- Botones de ordenamiento con íconos -->
+  <div class="btn-group btn-group-sm" role="group" aria-label="Ordenar">
+    <input type="radio" class="btn-check" name="options" id="sortAsc" />
+    <label class="btn btn-light" for="sortAsc">
+      <i class="fas fa-sort-amount-down-alt"></i>
+    </label>          
+
+    <input type="radio" class="btn-check" name="options" id="sortDesc" />
+    <label class="btn btn-light" for="sortDesc">
+      <i class="fas fa-sort-amount-up"></i>
+    </label>
+
+    <input type="radio" class="btn-check" name="options" id="sortByCount" checked />
+    <label class="btn btn-light" for="sortByCount">
+      <i class="fa fa-fire"></i>
+    </label>
+  </div>
+</div>
   <main class="pb-5 container">
     <br />
     <br />
