@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let sortAscBtn = document.getElementById("sortAsc");
     let sortDescBtn = document.getElementById("sortDesc");
     let sortByCountBtn = document.getElementById("sortByCount");
-    
+    let searchInput = document.getElementById("searchInput");
     var mostrarDatos = (productos, terminoBusqueda = "", filtroPrecio = {}) => {
         let htmlContent = "";
 
@@ -98,27 +98,28 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    // El siguiente codigo es la logica del input de busqueda
-    const input = document.getElementById("searchInput");
-    // const boton = document.getElementById("button");
-    input.addEventListener("input", () => {
-      mostrarDatos(todosProductos, input.value); // Usamos los productos almacenados para el filtrado
+  // Búsqueda en tiempo real con filtro de precio
+    searchInput.addEventListener("input", () => {
+        const minPrecio = parseFloat(minPriceInput.value) || 0;
+        const maxPrecio = parseFloat(maxPriceInput.value) || Infinity;
+        mostrarDatos(todosProductos, searchInput.value, { min: minPrecio, max: maxPrecio });
     });
-});
 
-    // Filtrar por rango de precio
+    // Filtrar por rango de precio cuando se hace clic en el botón "Filtrar"
     filterBtn.addEventListener("click", () => {
         const minPrecio = parseFloat(minPriceInput.value) || 0;
         const maxPrecio = parseFloat(maxPriceInput.value) || Infinity;
-        mostrarDatos(todosProductos, input.value, { min: minPrecio, max: maxPrecio });
+        mostrarDatos(todosProductos, searchInput.value, { min: minPrecio, max: maxPrecio });
     });
 
+    // Ordenar productos
     document.querySelectorAll('input[name="options"]').forEach(input => {
         input.addEventListener("change", () => {
             const criterio = input.id;
             const productosOrdenados = ordenarProductos(todosProductos, criterio);
-            mostrarDatos(productosOrdenados, document.getElementById("searchInput").value); // Mantener el filtro de búsqueda
+            const minPrecio = parseFloat(minPriceInput.value) || 0;
+            const maxPrecio = parseFloat(maxPriceInput.value) || Infinity;
+            mostrarDatos(productosOrdenados, searchInput.value, { min: minPrecio, max: maxPrecio }); // Mantener búsqueda y filtro de precios
         });
     });
 });
