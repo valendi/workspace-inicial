@@ -1,3 +1,7 @@
+function setProductId(id) {
+    localStorage.setItem("selectedProductID", id);
+  }
+
 document.addEventListener("DOMContentLoaded", function () {
     var todosProductos = [];
     
@@ -23,28 +27,40 @@ document.addEventListener("DOMContentLoaded", function () {
         for (let i = 0; i < productosFiltrados.length; i++) {
             let productoFiltrado = productosFiltrados[i];
             htmlContent += `
-            <div id="divJS">
-                <p id="imagen">
-                    <img src="${productoFiltrado.image}" alt="imagen del producto" height="300px" width="450px" border="2px"/>
-                </p>
-                <p id="nombre"> ${productoFiltrado.name} </p>
-                <p id="descripcion"> ${productoFiltrado.description} </p>
-                <br>
-                <p id="precio"> Precio: $${productoFiltrado.cost} </p>
-                <p id="vendidos"> Unid. Vendidas: + ${productoFiltrado.soldCount} </p>
-            </div>
-            `;
-        }
-        let contenedor = document.getElementById("divContenedor");
-        contenedor.innerHTML = htmlContent;
-    };
+                  <div id="divJS">
+                  <a id="imgProduct" href="product-info.html" onclick="setProductId('${productoFiltrado.id}')">
+                      <img class="imagenProduct" src="${productoFiltrado.image}" alt="imagen del producto"/>
+                      </a>
+                  <div id="divTexto">
+                      <p id="nombre"> ${productoFiltrado.name} </p>
+                      <p id="descripcion"> ${productoFiltrado.description} </p>
+                      <br>
+                      <p id="precio"> Precio: $${productoFiltrado.cost} </p>
+                      <p id="vendidos"> Unid. Vendidas: + ${productoFiltrado.soldCount} </p>
+                      </div>
+                  </div>
+                  `;
+          }
 
-    function filtrarProductos(productos, terminoBusqueda) {
-        return productos.filter(producto => {
-            return producto.name.toLowerCase().includes(terminoBusqueda.toLowerCase()) ||
-                producto.description.toLowerCase().includes(terminoBusqueda.toLowerCase());
-        });
+        let contenedor = document.getElementById("divContenedor");
+    if (contenedor) {
+      contenedor.innerHTML = htmlContent;
+    } else {
+      console.error("El contenedor no se encontró en el DOM.");
     }
+  };
+
+    //Funcion de filtrado
+  function filtrarProductos(productos, terminoBusqueda) {
+    return productos.filter((producto) => {
+      return (
+        producto.name.toLowerCase().includes(terminoBusqueda.toLowerCase()) ||
+        producto.description
+          .toLowerCase()
+          .includes(terminoBusqueda.toLowerCase())
+      );
+    });
+  }
 
     // Función para ordenar productos
     const ordenarProductos = (productos, criterio) => {
@@ -62,29 +78,34 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     const catID = localStorage.getItem("catID");
-    if (catID) {
-        const BASE_URL = "https://japceibal.github.io/emercado-api/cats_products/";
-        const DATA_AUTOS = `${BASE_URL}${catID}.json`;
+  if (catID) {
+    const BASE_URL = "https://japceibal.github.io/emercado-api/cats_products/";
+    const DATA_AUTOS = `${BASE_URL}${catID}.json`;
 
-        fetch(DATA_AUTOS)
-            .then(response => response.json())
-            .then(data => {
-                todosProductos = data.products;
-                mostrarDatos(todosProductos); // Mostrar todos los productos inicialmente
-            })
-            .catch(error => {
-                console.error("Error al obtener los datos", error);
-            });
-    } else {
-        console.error("No se encontró el identificador de categoría en el almacenamiento local.");
-    }
+    fetch(DATA_AUTOS)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Datos crudos de la API:", data);
+        todosProductos = data.products;
+        mostrarDatos(todosProductos); //Mostramos todos los productos inicialmente
+      })
+      .catch((error) => {
+        console.error("Error al obtener los datos", error);
+      });
+  } else {
+    console.error(
+      "No se encontró el identificador de categoría en el almacenamiento local."
+    );
+  }
 
+  document.addEventListener("DOMContentLoaded", function () {
     // El siguiente codigo es la logica del input de busqueda
     const input = document.getElementById("searchInput");
     // const boton = document.getElementById("button");
     input.addEventListener("input", () => {
-        mostrarDatos(todosProductos, input.value); // Usamos los productos almacenados para el filtrado
+      mostrarDatos(todosProductos, input.value); // Usamos los productos almacenados para el filtrado
     });
+});
 
     // Filtrar por rango de precio
     filterBtn.addEventListener("click", () => {
