@@ -56,16 +56,49 @@
       </div>
     </nav>
     <main>
-      <br>
+      <br />
       <div class="container my-4">
         <div class="product-info">
           <h1 id="product-name">Nombre del producto</h1>
           <p id="product-description">Descripción del producto</p>
-          <p id="product-category">Categoría: <span id="category-name"></span></p>
-          <p id="product-sold">Cantidad vendida: <span id="sold-quantity"></span></p>
-        </div>
-        <h2 id="galeriaProducto">Galería de imágenes</h2>
-          <div class="images" id="product-images"></div>
+          <p id="product-category">
+            Categoría: <span id="category-name"></span>
+          </p>
+          <p id="product-sold">
+            Cantidad vendida: <span id="sold-quantity"></span>
+          </p>
+          <!-- Carousel -->
+          <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner" id="carousel-images">
+              <!-- Insertar imagenes dinamicamente -->
+            </div>
+            <!-- Control para ir a la imagen anterior -->
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carousel"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <!-- Control para ir a la imagen siguiente -->
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carousel"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
         </div>
       </div>
     </main>
