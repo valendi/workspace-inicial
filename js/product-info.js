@@ -52,3 +52,49 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 //Insertar codigo de productos relacionados aqui
+
+
+//---Codigo de calificaciones---
+
+const productID = localStorage.getItem("selectedProductID");
+
+let apiCommentsURL = `https://japceibal.github.io/emercado-api/products_comments/${productID}.json`;
+
+fetch(apiCommentsURL)
+.then((response) => response.json())
+  .then(data =>{
+  mostrarComentarios(data);
+})
+.catch(error =>{
+  console.error('Error al cargar los datos', error);
+});
+
+function mostrarComentarios(comments) {
+  let listaComentarios = document.getElementById('calif-container');
+  listaComentarios.innerHTML = '';
+
+  comments.forEach(comment => {
+    let commentDiv = document.createElement('div');
+    commentDiv.classList.add('comentario');
+
+    let calificacion = document.createElement('p');
+    calificacion.textContent = `Calificación: ${comment.score}`;
+        
+    let usuario = document.createElement('p');
+      usuario.textContent = `Usuario: ${comment.user}`;
+
+    let fecha = document.createElement('p');
+      fecha.textContent = `Fecha: ${new Date(comment.dateTime).toLocaleDateString()}`;
+
+    let comentario = document.createElement('p');
+    comentario.textContent = `Comentario: ${comment.description}`;
+
+    commentDiv.appendChild(calificacion);
+    commentDiv.appendChild(usuario);
+    commentDiv.appendChild(fecha);
+    commentDiv.appendChild(comentario);
+
+    listaComentarios.appendChild(commentDiv); 
+  });
+
+}
