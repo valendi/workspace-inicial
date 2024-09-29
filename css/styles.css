@@ -363,3 +363,62 @@ p#product-category, p#product-sold{
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 1.1em;
 }
+
+#star-rating-container {
+  background-color: rgb(238, 238, 238); /* Fondo gris */
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 5%;
+  border-radius: 20px;
+  padding: 2% 2%;
+  text-align: center; /* Centrar el contenido */
+}
+
+#star-rating-container h3 {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#star-rating i {
+  color: gray; 
+  cursor: pointer;
+  font-size: 24px; /* Ajustar tamaño de las estrellas */
+}
+
+#star-rating i.fas {
+  color: orange; /* Estrellas llenas (clase 'fas') en naranja */
+}
+
+#comment-box {
+  width: 80%; /* Caja de comentarios más pequeña */
+  height: 80px; /* Altura más pequeña */
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 1em;
+  resize: none;
+}
+
+.button-container {
+  text-align: right; /* Alinear botón a la derecha */
+  margin-top: 10px;
+}
+
+#submit-button {
+  background-color: #007bff; /* Botón azul */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#submit-button:hover {
+  background-color: #0056b3; /* Azul más oscuro al hacer hover */
+}
