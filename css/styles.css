@@ -240,7 +240,7 @@ a.custom-card:hover {
   }
 }
 
-p#nombre, #product-name, h2#galeriaProducto {
+p#nombre, h2#galeriaProducto {
   font-weight: bold;
   text-decoration: underline;
   text-align: center;
@@ -249,12 +249,18 @@ p#nombre, #product-name, h2#galeriaProducto {
   padding-top: 10px;
 }
 
+#product-name {
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 2em;
+}
+
 p#descripcion, #product-description {
   text-align: center;
   margin-left: 20%;
   margin-right: 20%;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 1.25em;
+  font-size: 1.1em;
 }
 
 p#precio {
@@ -277,6 +283,13 @@ p#precio {
     font-size: 1em;
     margin: auto;
     padding-bottom: 0px;
+  }
+  #foo {
+    flex-direction: column-reverse;   
+  }
+
+  #foo > div {
+    width: 100%;
   }
 }
 
@@ -348,9 +361,9 @@ p#vendidos {
   }
 }
 
-#sold-quantity, #category-name{
+.subtitles {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 1em;
+  text-align: center;
   color: rgb(2, 78, 2);
   font-weight: bold;
 }
@@ -365,26 +378,18 @@ p#product-category, p#product-sold{
 }
 
 #star-rating-container {
-  background-color: rgb(238, 238, 238); /* Fondo gris */
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-bottom: 5%;
-  border-radius: 20px;
-  padding: 2% 2%;
   text-align: center; /* Centrar el contenido */
 }
 
-#star-rating-container h3 {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 1.5em;
-  margin-bottom: 20px;
-  color: #333;
-}
 
-#star-rating i {
+#star-rating i, .far.fa-star {
   color: gray; 
   cursor: pointer;
   font-size: 24px; /* Ajustar tamaño de las estrellas */
+}
+
+.far.fa-star{
+  font-size: 1em;
 }
 
 #star-rating i.fas {
@@ -392,8 +397,8 @@ p#product-category, p#product-sold{
 }
 
 #comment-box {
-  width: 80%; /* Caja de comentarios más pequeña */
-  height: 80px; /* Altura más pequeña */
+  width: 100%; /* Caja de comentarios más pequeña */
+  height: 20%; /* Altura más pequeña */
   margin-top: 20px;
   padding: 10px;
   border-radius: 10px;
@@ -422,3 +427,30 @@ p#product-category, p#product-sold{
 #submit-button:hover {
   background-color: #0056b3; /* Azul más oscuro al hacer hover */
 }
+#titleProductsInfo, #todosLosComentarios{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 1.1em;
+  text-align: center;
+  font-weight: bold;
+}
+
+#todosLosComentarios {
+  text-align: left;
+  font-size: 1.5em;
+}
+
+.card-title{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 1.2em;
+  text-align: center;
+}
+.card-img-top{
+  padding: 5%;
+}
+#productos-relacionados-contenedor {
+  margin-top: 1rem;
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.125);  
+}
+
