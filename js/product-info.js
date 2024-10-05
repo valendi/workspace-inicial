@@ -51,52 +51,161 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-//Insertar codigo de productos relacionados aqui
+//Codigo de productos relacionados
+document.addEventListener("DOMContentLoaded", function () {
+  // Obtiene el 'productID' guardado en el localStorage, que identifica el producto seleccionado.
+  const productID = localStorage.getItem("selectedProductID");
+  fetch(`https://japceibal.github.io/emercado-api/products/${productID}.json`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // Accediendo a los productos relacionados
+      const productosRelacionados = data.relatedProducts;
+      console.log("Productos relacionados:", productosRelacionados);
+      const contenedorProductosRelacionados = document.getElementById('productos-relacionados');
+      productosRelacionados.forEach((product) => { //Iterando sobre los productos relacionados
+        
+        //Crear un div contenedor para la tarjeta de cada uno de los productos
+        const tarjetaProducto = document.createElement("div");
+        tarjetaProducto.classList.add("card"); //Agregar clase card para que sea una tarjeta de bootstrap
+
+        //Crear elemento para que contenga la imagen de cada uno de los productos
+        const imagenProducto = document.createElement("img");
+        imagenProducto.classList.add("card-img-top"); //Agregar clase card img top para estilo de bootstrap
+        imagenProducto.src = product.image;
+        imagenProducto.alt = product.name;
+
+        // Crear el cuerpo de la tarjeta
+        const cuerpoTarjeta = document.createElement("div");
+        cuerpoTarjeta.classList.add("card-body"); //Clase bootrap al cuerpo de la tarjeta
+        
+        //Crear el elemento para que contenga el titulo de cada uno de los productos
+        const tituloProducto = document.createElement("h5");
+        tituloProducto.textContent = product.name;
+        tituloProducto.classList.add("card-title"); //Clase para el titulo con bootstrap
+
+        //Crear enlace para redireccionar la imagen
+        const enlaceProductoRelacionado = document.createElement("a");
+        enlaceProductoRelacionado.href = "product-info.html"
+        
+        //Agregar un evento click al enlace para guardar el id del producto en el local storage
+        enlaceProductoRelacionado.addEventListener("click", function(){
+          localStorage.setItem("selectedProductID", product.id);
+        });
+
+        //Insertar la imagen dentro del enlace
+        enlaceProductoRelacionado.appendChild(imagenProducto)
+        
+        // Añadir el título al cuerpo de la tarjeta
+        cuerpoTarjeta.appendChild(tituloProducto);
+
+        // Añadir el cuerpo de la tarjeta y el enlace al contenedor principal de la tarjeta
+        tarjetaProducto.appendChild(enlaceProductoRelacionado);
+        tarjetaProducto.appendChild(cuerpoTarjeta);
+
+        // Añadir la tarjeta completa al contenedor principal del grupo de tarjetas
+        contenedorProductosRelacionados.appendChild(tarjetaProducto);
+      })
+    })
+    .catch((error) => {
+      console.error("Hubo un problema con la solicitud:", error);
+    });
+});
 
 
-//---Codigo de calificaciones---
+//Codigo de calificaciones
 
 const productID = localStorage.getItem("selectedProductID");
 
 let apiCommentsURL = `https://japceibal.github.io/emercado-api/products_comments/${productID}.json`;
 
+const chequeoVentana = window.location.pathname.endsWith("product-info.html");
+
+if (chequeoVentana===true){
 fetch(apiCommentsURL)
 .then((response) => response.json())
 .then(data =>{
-mostrarComentarios(data);
+  localStorage.setItem("comments", JSON.stringify(data));
 })
 .catch(error =>{
 console.error('Error al cargar los datos', error);
-});
+})
+.finally(mostrarComentarios);
+} else {
+  mostrarComentarios(true);
+}
 
-function mostrarComentarios(comments) {
+function generarEstrellas(score) {
+  const maxStars = 5; // Número máximo de estrellas
+  let estrellasHTML = '';
+
+  for (let i = 1; i <= maxStars; i++) {
+    if (i <= score) {
+      estrellasHTML += '<span class="fa fa-star checked"></span>'; // Estrella llena
+    } else {
+      estrellasHTML += '<span class="far fa-star"></span>'; // Estrella vacía
+    }
+  }
+
+  return estrellasHTML;
+}
+
+function mostrarComentarios(mostrarTodos=false) {
+let comments = JSON.parse(localStorage.getItem("comments")) || [];
 let listaComentarios = document.getElementById('calif-container');
-listaComentarios.innerHTML = '';
+
+listaComentarios.innerHTML = ""
+if (mostrarTodos===false) {
+  comments = comments.slice(0,2);
+}
 
 comments.forEach(comment => {
   let commentDiv = document.createElement('div');
-  commentDiv.classList.add('comentario');
+  commentDiv.classList.add('container');
 
-  let calificacion = document.createElement('p');
-  calificacion.textContent = `Calificación: ${comment.score}`;
-      
-  let usuario = document.createElement('p');
-    usuario.textContent = `Usuario: ${comment.user}`;
+  // Crear una fila para Usuario y Fecha
+  let userFechaRow = document.createElement('div');
+  userFechaRow.classList.add('row');
 
-  let fecha = document.createElement('p');
-    fecha.textContent = `Fecha: ${new Date(comment.dateTime).toLocaleDateString()}`;
+  let usuario = document.createElement('div');
+  usuario.classList.add('col-6', 'order-1', 'text-start'); // Usuario a la derecha
+  usuario.textContent = `${comment.user}`;
+  
+  let fecha = document.createElement('div');
+  fecha.classList.add('col-6', 'order-2', 'text-muted', 'text-start'); // Fecha a la izquierda
+  fecha.textContent = `${new Date(comment.dateTime).toLocaleDateString()}`;
 
-  let comentario = document.createElement('p');
-  comentario.textContent = `Comentario: ${comment.description}`;
+  // Añadir usuario y fecha a la misma fila
+  userFechaRow.appendChild(usuario);
+  userFechaRow.appendChild(fecha);
 
-  commentDiv.appendChild(calificacion);
-  commentDiv.appendChild(usuario);
-  commentDiv.appendChild(fecha);
-  commentDiv.appendChild(comentario);
+  // Crear una fila para Calificación y Comentario
+  let calificacionComentarioRow = document.createElement('div');
+  calificacionComentarioRow.classList.add('row');
 
-  listaComentarios.appendChild(commentDiv); 
+  let calificacion = document.createElement('div');
+  calificacion.classList.add('col-6', 'order-1');
+  calificacion.innerHTML = `${generarEstrellas(comment.score)}`;
+
+  let comentario = document.createElement('div');
+  comentario.classList.add('col-6', 'text-muted', 'order-2');
+  comentario.textContent = `${comment.description}`;
+
+  // Añadir calificación y comentario a la misma fila
+  calificacionComentarioRow.appendChild(calificacion);
+  calificacionComentarioRow.appendChild(comentario);
+
+  // Añadir ambas filas al div principal
+  commentDiv.appendChild(userFechaRow);
+  commentDiv.appendChild(calificacionComentarioRow);
+
+  // Añadir el comentario al contenedor de comentarios
+  listaComentarios.appendChild(commentDiv);
 });
-
 }
 
 const stars = document.querySelectorAll("#star-rating i");
@@ -104,52 +213,34 @@ const submitButton = document.getElementById("submit-button");
 const commentBox = document.getElementById("comment-box");
 stars.forEach(star => {
 star.addEventListener("click", function () {
-  stars.forEach(s => s.classList.remove('fas', 'far')); 
+  stars.forEach(s => { s.classList.remove('fas');
+  s.classList.add('far');
+});
   const selectedValue = parseInt(this.getAttribute("data-value"));
   for (let i = 0; i < selectedValue; i++) {
+    stars[i].classList.remove('far');
     stars[i].classList.add('fas');
   }
 });
 });
-function mostrarComentarios(comments) {
-const listaComentarios = document.getElementById('calif-container');
-comments.forEach(comment => {
-  const commentDiv = document.createElement('div');
-  commentDiv.classList.add('comentario');
-
-  const calificacion = document.createElement('p');
-  calificacion.textContent = `Calificación: ${comment.score}`;
-    
-  const usuario = document.createElement('p');
-  usuario.textContent = `Usuario: ${comment.user}`;
-
-  const fecha = document.createElement('p');
-  fecha.textContent = `Fecha: ${new Date(comment.dateTime).toLocaleDateString()}`;
-
-  const comentario = document.createElement('p');
-  comentario.textContent = `Comentario: ${comment.description}`;
-
-  commentDiv.appendChild(calificacion);
-  commentDiv.appendChild(usuario);
-  commentDiv.appendChild(fecha);
-  commentDiv.appendChild(comentario);
-
-  listaComentarios.appendChild(commentDiv);
-});
-}
 
 submitButton.addEventListener("click", function () {
 const score = Array.from(stars).filter(star => star.classList.contains('fas')).length;
 
 const newComment = {
   score: score,
-  user: "Usuario Ejemplo",
+  user: `${localStorage.getItem("username")}`,
   dateTime: new Date().toISOString(),
   description: commentBox.value
 };
 
-mostrarComentarios([newComment]);
-commentBox.value = '';
-stars.forEach(star => star.classList.remove('fas'));
-stars.forEach(star => star.classList.add('far'));
+const existingComments = JSON.parse(localStorage.getItem("comments")) || [];
+existingComments.unshift(newComment);
+localStorage.setItem("comments", JSON.stringify(existingComments));
+mostrarComentarios();
 });
+
+function verMasComentarios() {
+  // Redirigir a la página de comentarios completos
+  window.location.href = 'comentarios_completos.html';
+}
