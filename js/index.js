@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Eventos para redirigir a las categorías
     document.getElementById("autos").addEventListener("click", function () {
         localStorage.setItem("catID", 101);
         window.location.href = "products.html";
@@ -14,17 +15,31 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "products.html";
     });
 
-    if (localStorage.getItem("loggedIn") !== "true") {
-        location.href = "login.html";
+    // Verificar si el usuario está autenticado
+    let usuario = JSON.parse(localStorage.getItem("usuario"));
+    if (!usuario) {
+        location.href = "login.html"; // Redirige al login si no hay usuario autenticado
     } else {
-        var username = localStorage.getItem("username");
-        document.getElementById("displayUsername").textContent = username ? `Cliente: ${username}` : "Invitado";
+        // Mostrar el nombre del usuario en la barra de navegación
+        const displayUsernameElement = document.getElementById("displayUsername");
+        if (displayUsernameElement) {
+            displayUsernameElement.innerText = usuario.email;
+            if (typeof loadUserProfile === "function") {
+                loadUserProfile(usuario.email);
+            }
+        }
     }
 
-    document.getElementById("cerrar").addEventListener("click", function (event) {
-        event.preventDefault();
-        localStorage.removeItem("username");
-        localStorage.removeItem("loggedIn");
-        location.href = "login.html";
-    });
+    // Configurar evento para cerrar sesión
+    const cerrarSesionButton = document.getElementById("cerrar");
+    if (cerrarSesionButton) {
+        cerrarSesionButton.addEventListener("click", function (event) {
+            event.preventDefault();
+            localStorage.removeItem("usuario");
+            localStorage.removeItem("loggedIn");
+            location.href = "login.html";
+        });
+    } else {
+        console.warn("El botón de cerrar sesión ('cerrar') no se encontró en el DOM.");
+    }
 });

@@ -11,6 +11,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet" />
   <link href="css/styles.css" rel="stylesheet" />
   <script src="js/protectedPath.js"></script>
+  <script src="js/comentarios.js"></script>
   <!-- Script de logica de login -->
   <script src="js/loginLogic.js"></script>
 </head>
@@ -31,11 +32,16 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="sell.html">Vender</a>
-        </li>
-        <!-- Nav item que muestra username ingresado en login -->
-        <li class="nav-item">
-          <a class="nav-link" href="my-profile.html"><span id="displayUsername"></span></a>
-        </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <span id="displayUsername"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+              <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+              <li><a id="cerrar" class="dropdown-item" href="#">Cerrar sesión</a></li>
+            </ul>
+          </li>
       </ul>
     </div>
   </div>
