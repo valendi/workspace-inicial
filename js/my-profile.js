@@ -1,11 +1,18 @@
-document.addEventListener("DOMContentLoaded", () => {
-    let usuario = JSON.parse(localStorage.getItem("usuario"));
+let usuario = JSON.parse(localStorage.getItem("usuario"));
     if (!usuario) {
         location.href = "login.html";
     } else {
-        document.getElementById("displayUsername").innerText = "Cliente: " + usuario.email;
+        document.getElementById("displayUsername").innerText = usuario.email;
         loadUserProfile(usuario.email);
     }
+
+    // Evento para cerrar sesión
+    document.getElementById("cerrar").addEventListener("click", function (event) {
+        event.preventDefault();
+        localStorage.removeItem("usuario");
+        localStorage.removeItem("loggedIn");
+        location.href = "login.html";
+    });
 
     // Código para el modo noche
     const modoNocheSwitch = document.getElementById("darkModeToggle");
@@ -85,14 +92,4 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("userProfile", JSON.stringify(userProfile));
     }
 
-    // Código para cerrar sesión
-    const cerrarBtn = document.getElementById("cerrar");
-    if (cerrarBtn) {
-        cerrarBtn.addEventListener("click", function() {
-            localStorage.removeItem("usuario");
-            localStorage.removeItem("contraseña");
-            localStorage.removeItem("userProfile");
-            location.href = "login.html";
-        });
-    }
-});
+
