@@ -53,7 +53,9 @@
       <div class="row" id="foo">
         <!-- Seccion de la izquierda -->
         <div class="col-6">
+          <div class="row">
           <!-- Carrusel de imagenes -->
+          <div class="col-12">
           <p id="product-category">
           <h2 id="category-name" class="subtitles"></h2>
           </p>
@@ -69,6 +71,8 @@
               <span class="visually-hidden">Next</span>
             </button>
           </div>
+        </div>
+      </div>
           <!-- Productos relacionados -->
           <div id="productos-relacionados-contenedor">
             <p id="titleProductsInfo">Productos relacionados</p>
@@ -77,6 +81,9 @@
         </div>
         <!-- Seccion de la derecha -->
         <div class="col-6">
+          <div class="row">
+            <!-- Descripción del producto -->
+            <div class="col-12">
           <div id="description-section">
             <h1 id="product-name">Nombre del producto</h1>
             <p id="product-description">Descripción del producto</p>
@@ -84,14 +91,18 @@
               <span id="sold-quantity"></span> unidades vendidas
             </p>
           </div>
+        </div>
+      </div>
           </br>
-          <!-- Calificaciones -->
-          <div id="calif-container"></div>
-          <div style="text-align: right;">
-            <button id="verMas" class="btn btn-secondary mt-3" type="submit" onclick="verMasComentarios()">Ver
-              mas</button>
+          <div class="row">
+            <!-- Calificaciones -->
+            <div class="col-12" id="calif-container"></div>
+            <div class="col-12 text-end">
+              <button id="verMas" class="btn btn-secondary mt-3" type="button" onclick="verMasComentarios()">Ver más</button>
+            </div>
           </div>
           <br>
+          <div class="row">
           <!--  Calificacion del producto -->
           <div id="star-rating-container">
             <p id="titleProductsInfo">¿Te gustaría calificar el producto? Anímate</p>
@@ -113,6 +124,11 @@
       </div>
     </div>
     </div>
+    </div>
+    <br>
+    <div class="form-check form-switch container">
+      <input class="form-check-input" type="checkbox" id="darkModeToggle">
+      <label class="form-check-label" for="darkModeToggle">Modo día/noche</label>
     </div>
   </main>
 
