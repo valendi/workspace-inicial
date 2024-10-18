@@ -364,7 +364,6 @@ p#vendidos {
 .subtitles {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   text-align: center;
-  color: rgb(2, 78, 2);
   font-weight: bold;
 }
 
@@ -372,7 +371,6 @@ p#product-category, p#product-sold{
   text-align: center;
   font-style: italic;
   font-weight: bold;
-  color: rgb(61, 61, 61);
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 1.1em;
 }
@@ -454,3 +452,49 @@ p#product-category, p#product-sold{
   border: 1px solid rgba(0, 0, 0, 0.125);  
 }
 
+
+body.dark-mode {
+  background-color: #343a40;
+  color: #f8f9fa;
+}
+
+body.dark-mode .card {
+  background-color: #495057;
+  border-color: #6c757d;
+}
+
+body.dark-mode .card-title,
+body.dark-mode .card-text {
+  color: #f8f9fa;
+}
+
+body.dark-mode #comment-box {
+  background-color: #495057;
+  /* Darker background for textarea */
+  color: #f8f9fa;
+  /* Light text color */
+  border: 1px solid #6c757d;
+  /* Border color */
+}
+
+#comment-box {
+  background-color: #ffffff;
+  /* Light background */
+  color: #212529;
+  /* Dark text color */
+  border: 1px solid #ced4da;
+  /* Border color */
+}
+
+body.dark-mode #titleProductsInfo,
+body.dark-mode .button-container button {
+  color: #f8f9fa;
+  /* Light text for title and button */
+}
+
+body.dark-mode .button-container button {
+  background-color: #6c757d;
+  /* Dark button background */
+  color: #ffffff;
+  /* Light button text */
+}
