@@ -445,13 +445,13 @@ p#product-category, p#product-sold{
 .card-img-top{
   padding: 5%;
 }
+
 #productos-relacionados-contenedor {
   margin-top: 1rem;
   border-radius: 5px;
   padding: 10px;
   border: 1px solid rgba(0, 0, 0, 0.125);  
 }
-
 
 body.dark-mode {
   background-color: #343a40;
@@ -498,3 +498,40 @@ body.dark-mode .button-container button {
   color: #ffffff;
   /* Light button text */
 }
+
+button#pagoCarrito{
+  color: white;
+  background-color: black;
+  border-radius: 20px;
+  padding-right: 10px;
+  padding-left: 10px;
+  text-align: center;
+  margin: auto;
+  display: flex;
+}
+
+button#pagoCarrito:hover{
+  color: rgb(0, 0, 0);
+  background-color: rgb(175, 175, 175);
+}
+
+#resumen{
+  padding: 30px;
+}
+
+#productosCarrito{
+  padding: 30px;
+}
+
+.full-height{
+  height: 100vh;
+}
+
+#contResumen{
+  background-color: #e6e6e6;
+}
+
+#subTitl, #envioTitl, #totalTitl {
+  font-weight: bold;
+}
+
