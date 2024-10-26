@@ -1,4 +1,3 @@
-// Escucha el evento 'DOMContentLoaded', que asegura que el DOM esté completamente cargado antes de ejecutar el código.
 document.addEventListener("DOMContentLoaded", function () {
   const productID = localStorage.getItem("selectedProductID");
   if (productID) {
@@ -192,6 +191,27 @@ function verMasComentarios() {
   window.location.href = 'comentarios_completos.html';
 }
 
+// Funcionalidad del botón "Comprar"
+const buyButton = document.getElementById("buy-button");
+buyButton.addEventListener("click", function () {
+  const productID = localStorage.getItem("selectedProductID");
+  fetch(`https://japceibal.github.io/emercado-api/products/${productID}.json`)
+    .then(response => response.json())
+    .then(product => {
+      const productInfo = {
+        id: product.id,
+        name: product.name,
+        price: product.cost,
+        description: product.description,
+        category: product.category,
+        image: product.images[0],
+      };
+      localStorage.setItem("productToBuy", JSON.stringify(productInfo));
+      window.location.href = "cart.html";
+    })
+    .catch(error => console.error("Error fetching product data: ", error));
+});
+
 // Verificación de autenticación
 let usuario = JSON.parse(localStorage.getItem("usuario"));
 if (!usuario) {
@@ -217,7 +237,7 @@ if (cerrarSesionButton) {
   });
 }
 
-//Dark mode
+// Dark mode
 const toggle = document.getElementById('darkModeToggle');
 const body = document.body;
 
