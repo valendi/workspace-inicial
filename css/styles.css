@@ -199,7 +199,7 @@ a.custom-card:hover {
   border-radius: 20px;
 }
 
-@media (max-width: 1000px){
+@media (max-width: 1000px) {
   #divJS {
     display: unset;
     align-items: normal;
@@ -232,7 +232,7 @@ a.custom-card:hover {
   text-align: center;
 }
 
-@media (max-width: 1000px){
+@media (max-width: 1000px) {
   #divTexto {
     max-width: 100%;
     margin-bottom: 25%;
@@ -240,7 +240,8 @@ a.custom-card:hover {
   }
 }
 
-p#nombre, h2#galeriaProducto {
+p#nombre,
+h2#galeriaProducto {
   font-weight: bold;
   text-decoration: underline;
   text-align: center;
@@ -255,7 +256,8 @@ p#nombre, h2#galeriaProducto {
   font-size: 2em;
 }
 
-p#descripcion, #product-description {
+p#descripcion,
+#product-description {
   text-align: center;
   margin-left: 20%;
   margin-right: 20%;
@@ -273,7 +275,7 @@ p#precio {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 1em;
   float: left;
-  text-decoration: underline; 
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {
@@ -284,11 +286,12 @@ p#precio {
     margin: auto;
     padding-bottom: 0px;
   }
+
   #foo {
-    flex-direction: column-reverse;   
+    flex-direction: column-reverse;
   }
 
-  #foo > div {
+  #foo>div {
     width: 100%;
   }
 }
@@ -328,7 +331,9 @@ p#vendidos {
   padding: 7px 20px 7px 40px;
 }
 
-.images, #product-images, .img-fluid {
+.images,
+#product-images,
+.img-fluid {
   max-width: 100%;
   height: auto;
   flex: 1 1 auto;
@@ -338,12 +343,12 @@ p#vendidos {
   object-fit: cover;
 }
 
-.imagenProduct{
+.imagenProduct {
   max-width: 350px;
   padding-bottom: 15%;
 }
 
-@media (max-width: 1000px){
+@media (max-width: 1000px) {
   .imagenProduct {
     max-width: 100%;
     padding-bottom: 5%;
@@ -355,7 +360,7 @@ p#vendidos {
   align-items: center;
 }
 
-@media (max-width: 1000px){
+@media (max-width: 1000px) {
   #imgProduct {
     display: unset;
   }
@@ -367,7 +372,8 @@ p#vendidos {
   font-weight: bold;
 }
 
-p#product-category, p#product-sold{
+p#product-category,
+p#product-sold {
   text-align: center;
   font-style: italic;
   font-weight: bold;
@@ -376,27 +382,33 @@ p#product-category, p#product-sold{
 }
 
 #star-rating-container {
-  text-align: center; /* Centrar el contenido */
+  text-align: center;
+  /* Centrar el contenido */
 }
 
 
-#star-rating i, .far.fa-star {
-  color: gray; 
+#star-rating i,
+.far.fa-star {
+  color: gray;
   cursor: pointer;
-  font-size: 24px; /* Ajustar tamaño de las estrellas */
+  font-size: 24px;
+  /* Ajustar tamaño de las estrellas */
 }
 
-.far.fa-star{
+.far.fa-star {
   font-size: 1em;
 }
 
 #star-rating i.fas {
-  color: orange; /* Estrellas llenas (clase 'fas') en naranja */
+  color: orange;
+  /* Estrellas llenas (clase 'fas') en naranja */
 }
 
 #comment-box {
-  width: 100%; /* Caja de comentarios más pequeña */
-  height: 20%; /* Altura más pequeña */
+  width: 100%;
+  /* Caja de comentarios más pequeña */
+  height: 20%;
+  /* Altura más pequeña */
   margin-top: 20px;
   padding: 10px;
   border-radius: 10px;
@@ -407,13 +419,18 @@ p#product-category, p#product-sold{
 }
 
 .button-container {
-  text-align: right; /* Alinear botón a la derecha */
+  text-align: right;
   margin-top: 10px;
 }
 
+.buy-button-container {
+  text-align: center;
+  margin: auto;
+  width: 50%;
+  padding: 1em;
+}
+
 #submit-button {
-  background-color: #007bff; /* Botón azul */
-  color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
@@ -423,9 +440,12 @@ p#product-category, p#product-sold{
 }
 
 #submit-button:hover {
-  background-color: #0056b3; /* Azul más oscuro al hacer hover */
+  background-color: #0056b3;
+  /* Azul más oscuro al hacer hover */
 }
-#titleProductsInfo, #todosLosComentarios{
+
+#titleProductsInfo,
+#todosLosComentarios {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 1.1em;
   text-align: center;
@@ -437,12 +457,13 @@ p#product-category, p#product-sold{
   font-size: 1.5em;
 }
 
-.card-title{
+.card-title {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 1.2em;
   text-align: center;
 }
-.card-img-top{
+
+.card-img-top {
   padding: 5%;
 }
 
@@ -450,7 +471,7 @@ p#product-category, p#product-sold{
   margin-top: 1rem;
   border-radius: 5px;
   padding: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.125);  
+  border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 body.dark-mode {
@@ -470,36 +491,27 @@ body.dark-mode .card-text {
 
 body.dark-mode #comment-box {
   background-color: #495057;
-  /* Darker background for textarea */
   color: #f8f9fa;
-  /* Light text color */
   border: 1px solid #6c757d;
-  /* Border color */
 }
 
 #comment-box {
   background-color: #ffffff;
-  /* Light background */
   color: #212529;
-  /* Dark text color */
   border: 1px solid #ced4da;
-  /* Border color */
 }
 
 body.dark-mode #titleProductsInfo,
 body.dark-mode .button-container button {
   color: #f8f9fa;
-  /* Light text for title and button */
 }
 
 body.dark-mode .button-container button {
   background-color: #6c757d;
-  /* Dark button background */
   color: #ffffff;
-  /* Light button text */
 }
 
-button#pagoCarrito{
+button#pagoCarrito {
   color: white;
   background-color: black;
   border-radius: 20px;
@@ -510,28 +522,29 @@ button#pagoCarrito{
   display: flex;
 }
 
-button#pagoCarrito:hover{
+button#pagoCarrito:hover {
   color: rgb(0, 0, 0);
   background-color: rgb(175, 175, 175);
 }
 
-#resumen{
+#resumen {
   padding: 30px;
 }
 
-#productosCarrito{
+#productosCarrito {
   padding: 30px;
 }
 
-.full-height{
+.full-height {
   height: 100vh;
 }
 
-#contResumen{
+#contResumen {
   background-color: #e6e6e6;
 }
 
-#subTitl, #envioTitl, #totalTitl {
+#subTitl,
+#envioTitl,
+#totalTitl {
   font-weight: bold;
 }
-
