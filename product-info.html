@@ -11,7 +11,6 @@
   <link href="css/bootstrap.min.css" rel="stylesheet" />
   <link href="css/styles.css" rel="stylesheet" />
   <script src="js/protectedPath.js"></script>
-  <!-- Script de logica de login -->
   <script src="js/loginLogic.js"></script>
 </head>
 
@@ -51,51 +50,44 @@
     </br>
     <div class="container">
       <div class="row" id="foo">
-        <!-- Seccion de la izquierda -->
         <div class="col-6">
           <div class="row">
-          <!-- Carrusel de imagenes -->
-          <div class="col-12">
-          <p id="product-category">
-          <h2 id="category-name" class="subtitles"></h2>
-          </p>
-          <div id="carousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner" id="carousel-images">
+            <div class="col-12">
+              <p id="product-category">
+                <h2 id="category-name" class="subtitles"></h2>
+              </p>
+              <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner" id="carousel-images"></div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
           </div>
-        </div>
-      </div>
-          <!-- Productos relacionados -->
           <div id="productos-relacionados-contenedor">
             <p id="titleProductsInfo">Productos relacionados</p>
             <div class="card-group" id="productos-relacionados"></div>
           </div>
         </div>
-        <!-- Seccion de la derecha -->
         <div class="col-6">
           <div class="row">
-            <!-- Descripción del producto -->
             <div class="col-12">
-          <div id="description-section">
-            <h1 id="product-name">Nombre del producto</h1>
-            <p id="product-description">Descripción del producto</p>
-            <p id="product-sold" class="subtitles">
-              <span id="sold-quantity"></span> unidades vendidas
-            </p>
+              <div id="description-section">
+                <h1 id="product-name">Nombre del producto</h1>
+                <p id="product-description">Descripción del producto</p>
+                <p id="product-sold" class="subtitles">
+                  <span id="sold-quantity"></span> unidades vendidas
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-          </br>
+          <br>
           <div class="row">
-            <!-- Calificaciones -->
             <div class="col-12" id="calif-container"></div>
             <div class="col-12 text-end">
               <button id="verMas" class="btn btn-secondary mt-3" type="button" onclick="verMasComentarios()">Ver más</button>
@@ -103,27 +95,26 @@
           </div>
           <br>
           <div class="row">
-          <!--  Calificacion del producto -->
-          <div id="star-rating-container">
-            <p id="titleProductsInfo">¿Te gustaría calificar el producto? Anímate</p>
-            <div id="star-rating">
+            <div id="star-rating-container">
+              <p id="titleProductsInfo">¿Te gustaría calificar el producto? Anímate</p>
               <div id="star-rating">
-                <i class="far fa-star" data-value="1"></i>
-                <i class="far fa-star" data-value="2"></i>
-                <i class="far fa-star" data-value="3"></i>
-                <i class="far fa-star" data-value="4"></i>
-                <i class="far fa-star" data-value="5"></i>
-              </div>
-              <textarea id="comment-box" placeholder="Deja tu comentario aquí..."></textarea>
-              <div class="button-container">
-                <button id="submit-button">Enviar</button>
+                <div id="star-rating">
+                  <i class="far fa-star" data-value="1"></i>
+                  <i class="far fa-star" data-value="2"></i>
+                  <i class="far fa-star" data-value="3"></i>
+                  <i class="far fa-star" data-value="4"></i>
+                  <i class="far fa-star" data-value="5"></i>
+                </div>
+                <textarea id="comment-box" placeholder="Deja tu comentario aquí..."></textarea>
+                <div class="button-container">
+                  <button id="submit-button">Enviar</button>
+                </div>
               </div>
             </div>
           </div>
+          <button id="buy-button" class="btn btn-primary mt-3">Comprar</button>
         </div>
       </div>
-    </div>
-    </div>
     </div>
     <br>
     <div class="form-check form-switch container">
