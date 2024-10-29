@@ -202,14 +202,29 @@ buyButton.addEventListener("click", function () {
         id: product.id,
         name: product.name,
         price: product.cost,
-        description: product.description,
-        category: product.category,
-        image: product.images[0],
+        quantity: 1 // Modifica las cantidades agregadas del mismo producto al carrito
       };
-      localStorage.setItem("productToBuy", JSON.stringify(productInfo));
-      window.location.href = "cart.html";
+
+      // Obtiene los productos del carrito actual
+      let itemsCarrito = JSON.parse(localStorage.getItem("itemsCarrito")) || [];
+
+      // Verifica si el producto ya está en el carrito
+      const productoExistente = itemsCarrito.find(item => item.id === productInfo.id);
+      if (productoExistente) {
+
+        // Si ya existe, aumenta la cantidad
+        productoExistente.quantity += 1;
+      } else {
+        
+        // Si no existe, agregar el nuevo producto
+        itemsCarrito.push(productInfo);
+      }
+
+      // Guarda el carrito actualizado en localStorage
+      localStorage.setItem("itemsCarrito", JSON.stringify(itemsCarrito));
+      window.location.href = "cart.html"; // Redirige al carrito
     })
-    .catch(error => console.error("Error fetching product data: ", error));
+    .catch(error => console.error("Error al cargar los datos del producto: ", error));
 });
 
 // Verificación de autenticación
