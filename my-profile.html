@@ -8,105 +8,119 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <style>
+        /* Estilos para el título */
         h2 {
             color: white;
             background-color: gray;
             text-align: center;
             padding: 10px;
         }
-        
+
+        /* Estilos para las etiquetas de formulario */
         .form-label {
             font-weight: bold;
         }
-        
+
+        /* Contenedor principal */
         .container {
             max-width: 800px;
         }
-        
+
+        /* Contenedor de perfil */
         .profile-container {
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
         }
-        
+
+        /* Estilo para la imagen de perfil */
         .profile-pic-container {
             flex: 1;
             margin-right: 20px;
             text-align: center;
         }
-        
+
         .profile-pic-container img {
             border-radius: 50%;
             width: 150px;
             height: 150px;
             object-fit: cover;
             margin-bottom: 10px;
+            cursor: pointer; /* Cambia el cursor a puntero */
         }
-        
+
+        /* Contenedor del formulario */
         .form-container {
             flex: 2;
         }
-        
+
+        /* Modo noche */
         body.night-mode {
             background-color: #2c2c2c;
             color: white;
         }
-        
+
+        /* Modo noche - Estilos de entrada y etiqueta */
         body.night-mode input,
         body.night-mode label {
             color: #ffffff;
         }
-        
+
+        /* Modo noche - Estilos de formulario */
         body.night-mode .form-control {
             background-color: white;
             color: #333;
             border-color: #666;
         }
-        
+
+        /* Modo noche - Estilo de etiqueta */
         body.night-mode .form-label {
             color: #ffffff;
         }
-        
+
+        /* Estilo de botón primario */
         .btn-primary {
             background-color: #28a745;
             border-color: #28a745;
         }
-        
+
+        /* Hover para botón primario */
         .btn-primary:hover {
             background-color: #218838;
         }
     </style>
-
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav w-100 justify-content-between">
-    <li class="nav-item">
-        <a class="nav-link" href="index.html">Inicio</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="categories.html">Categorías</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="sell.html">Vender</a>
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <span id="displayUsername"></span>
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
-        <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
-        <li><a id="cerrar" class="dropdown-item" href="#">Cerrar sesión</a></li>
-        </ul>
-    </li>
-    </div>
-    </div>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav w-100 justify-content-between">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="categories.html">Categorías</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sell.html">Vender</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span id="displayUsername"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+                            <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+                            <li><a id="cerrar" class="dropdown-item" href="#">Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
 
     <main>
@@ -115,8 +129,9 @@
             <div class="profile-container">
                 <div class="profile-pic-container">
                     <img id="profilePicPreview" src="https://via.placeholder.com/150" alt="Foto de perfil">
-                    <input type="file" id="profilePic" class="form-control" />
-                    <button class="btn btn-secondary mt-2">Cargar foto de perfil</button>
+                    <input type="file" id="profilePic" class="form-control" accept="image/*" style="display: none;" />
+                    <button class="btn btn-primary mt-2" id="uploadProfilePic">Cargar foto de perfil</button>
+                    <button class="btn btn-danger mt-2" id="removeProfilePic">Eliminar foto de perfil</button>
                 </div>
 
                 <div class="form-container">

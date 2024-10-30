@@ -1,114 +1,91 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>eMercado - Todo lo que busques está aquí</title>
-    <link
-      href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <script src="js/protectedPath.js"></script>
-    <!-- Script de logica de login -->
     <script src="js/loginLogic.js"></script>
-  </head>
+</head>
 
-  <body>
+<body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-      <div class="container">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav w-100 justify-content-between">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="categories.html">Categorías</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="sell.html">Vender</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <span id="displayUsername"></span>
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
-                <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
-                <li><a id="cerrar" class="dropdown-item" href="#">Cerrar sesión</a></li>
-              </ul>
-            </li>
-          </ul>
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav w-100 justify-content-between">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="categories.html">Categorías</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sell.html">Vender</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span id="displayUsername"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+                            <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+                            <li><a id="cerrar" class="dropdown-item" href="#">Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
     </nav>
+
     <main>
-      <br>
-      <div class="row full-height">
-        <div class="col-8" >
-          <div class="container" id="contenedorCarrito">
-          <br>
-          <h4 id="#titlCarrito">Carrito de compras</h4>
-          <br>
-            <div id="productosCarrito">
-          </div>
-          <div id="carritoVacio" style="display: none;">
-            <p>No hay productos en el carrito.</p>
-        </div>
-        </div>
-      </div>
-    <div class="col-4" id="contResumen" >
-      <div  id="resumen">
-        <h4 id="titlResumen">Resumen</h4>
-        <hr>
-        <p id="subTitl"> </p>
-        <p id="envioTitl">Envío:</p><p id="envioPrecio">$ 0</p>
-        <hr>
-        <p id="totalTitl"> </p>
         <br>
-        <button id="pagoCarrito">Proceder al pago</button>
-      </div>
-    </div>
-  </div>
-    </div>
+        <div class="row full-height">
+            <div class="col-8">
+                <div class="container" id="contenedorCarrito">
+                    <br>
+                    <h4 id="titlCarrito">Carrito de compras</h4>
+                    <br>
+                    <div id="productosCarrito"></div>
+                    <div id="carritoVacio" style="display: none;">
+                        <p>No hay productos en el carrito.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4" id="contResumen">
+                <div id="resumen">
+                    <h4 id="titlResumen">Resumen</h4>
+                    <hr>
+                    <p id="subTitl"></p>
+                    <p id="envioTitl">Envío:</p>
+                    <p id="envioPrecio">$ 0</p>
+                    <hr>
+                    <p id="totalTitl"></p>
+                    <br>
+                    <button id="pagoCarrito">Proceder al pago</button>
+                </div>
+            </div>
+        </div>
     </main>
+
     <footer class="text-muted">
-      <div class="container">
-        <p class="float-end">
-          <a href="#">Volver arriba</a>
-        </p>
-        <p>
-          Este sitio forma parte de
-          <a href="https://jovenesaprogramar.edu.uy/" target="_blank"
-            >Jovenes a Programar</a></p>
-      </div>
+        <div class="container">
+            <p class="float-end"><a href="#">Volver arriba</a></p>
+            <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+        </div>
     </footer>
+    
     <div id="spinner-wrapper">
-      <div class="lds-ring">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
+        <div class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
+    
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
     <script src="js/cart.js"></script>
-  </body>
+</body>
 </html>
