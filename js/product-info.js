@@ -202,6 +202,9 @@ buyButton.addEventListener("click", function () {
         id: product.id,
         name: product.name,
         price: product.cost,
+        description: product.description,
+        category: product.category,
+        image: product.images[0],
         quantity: 1 // Modifica las cantidades agregadas del mismo producto al carrito
       };
 
