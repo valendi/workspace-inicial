@@ -51,9 +51,10 @@ document.addEventListener('DOMContentLoaded', () => {
             productDiv.innerHTML =
             `
                 <hr>
-                <h5>${item.name}</h5>
-                <p>Precio: $${item.price}</p>
-                <p>Cantidad: ${item.quantity}</p>
+                <img id='imgcart' width=25% height=25% src='${item.image}' alt='${item.name}' />
+                <h5 id='namecart'>${item.name}</h5>
+                <p id='pricecart'>Precio: $${item.price}</p>
+                <p id='quantcart'>Cantidad: ${item.quantity}</p>
                 <hr>
             `;
             itemsCarritoContenedor.appendChild(productDiv);

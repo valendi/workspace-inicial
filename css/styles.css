@@ -543,3 +543,13 @@ button#pagoCarrito:hover {
   background-color: #e6e6e6;
 }
 
+#imgcart {
+  margin: 1%;
+  width: 25%;
+}
+
+#pricecart,
+#quantcart,
+#namecart {
+  margin: 1%;
+}
