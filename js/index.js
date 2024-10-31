@@ -43,3 +43,18 @@ document.addEventListener("DOMContentLoaded", () => {
         console.warn("El botón de cerrar sesión ('cerrar') no se encontró en el DOM.");
     }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    actualizarBadgeCarrito();
+    
+    function actualizarBadgeCarrito() {
+        const itemsCarrito = JSON.parse(localStorage.getItem("itemsCarrito")) || [];
+        const totalProductos = itemsCarrito.reduce((total, item) => total + item.quantity, 0);
+        document.getElementById("cart-badge").innerText = totalProductos;
+    }
+    
+      // Llamar a la función después de agregar productos al carrito
+    buyButton.addEventListener("click", function () {
+        actualizarBadgeCarrito();
+    });
+    });
