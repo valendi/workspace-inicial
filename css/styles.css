@@ -5,6 +5,12 @@
   font-family: 'Verdana', serif !important;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Asegura que el body ocupe al menos el 100% de la altura de la ventana */
+}
+
 .jumbotron .display-4 {
   font-weight: bold;
 }
@@ -70,8 +76,10 @@ nav a {
 footer {
   padding-top: 3rem;
   padding-bottom: 3rem;
+    background-color: #f1f1f1; 
+    text-align: center;
+    padding: 10px 0;
 }
-
 footer p {
   margin-bottom: .25rem;
 }
@@ -177,6 +185,9 @@ footer p {
 
 main {
   min-height: calc(100vh - 210px);
+
+    flex: 1; /* Permite que el main crezca para llenar el espacio disponible */
+
 }
 
 a.custom-card,
