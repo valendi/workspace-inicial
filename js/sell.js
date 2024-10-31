@@ -183,8 +183,4 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("cart-badge").innerText = totalProductos;
     }
     
-      // Llamar a la función después de agregar productos al carrito
-    buyButton.addEventListener("click", function () {
-        actualizarBadgeCarrito();
-    });
     });
