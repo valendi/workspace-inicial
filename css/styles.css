@@ -553,3 +553,12 @@ button#pagoCarrito:hover {
 #namecart {
   margin: 1%;
 }
+
+/* Estilo para el badge */
+#cart-badge {
+  background-color: #dc3545; 
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 0.2em 0.5em;
+}
