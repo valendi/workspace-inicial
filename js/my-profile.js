@@ -50,14 +50,19 @@ document.getElementById("profilePic").addEventListener("change", (event) => {
     if (file) {
         const reader = new FileReader();
         reader.onload = (e) => {
-            // Mostrar la previsualización de la imagen
-            document.getElementById("profilePicPreview").src = e.target.result;
-            // Guardar temporalmente la imagen en localStorage
-            localStorage.setItem("tempProfilePic", e.target.result);
-        };
-        reader.onloadend = () => {
-            // Mostrar el mensaje de alerta después de que la imagen se haya cargado
-            alert("Imagen de perfil cargada. Haz clic en 'Guardar Cambios' para guardar la imagen.");
+            try {
+                // Intentar guardar la imagen en localStorage
+                localStorage.setItem("tempProfilePic", e.target.result);
+                document.getElementById("profilePicPreview").src = e.target.result;
+                alert("Imagen de perfil cargada. Haz clic en 'Guardar Cambios' para guardar.");
+            } catch (error) {
+                // Capturar el error si el espacio es excedido
+                if (error.name === "QuotaExceededError") {
+                    alert("La imagen es demasiado grande para guardarse. Por favor, intenta con una imagen más pequeña.");
+                } else {
+                    console.error("Error al guardar la imagen:", error);
+                }
+            }
         };
         reader.readAsDataURL(file);
     }
