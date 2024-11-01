@@ -205,6 +205,7 @@ buyButton.addEventListener("click", function () {
         description: product.description,
         category: product.category,
         image: product.images[0],
+        currency: product.currency, //Agregue esto para saber si esta en USD o UYU
         quantity: 1 // Modifica las cantidades agregadas del mismo producto al carrito
       };
 

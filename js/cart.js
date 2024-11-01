@@ -54,12 +54,18 @@ document.addEventListener('DOMContentLoaded', () => {
         itemsCarrito.forEach(item => {
             const productDiv = document.createElement('div');
             productDiv.className = 'product-item';
-            const itemPrice = parseFloat(item.price);
+            let itemPrice = item.price;
+            const itemCurrency = item.currency;
+
+            function conversionDolares(){
+                return itemCurrency === "USD" ? itemPrice * 40 : itemPrice;
+            }
+            itemPrice = conversionDolares(); 
+
             const itemQuantity = parseInt(item.quantity);
             const itemSubtotal = itemPrice * itemQuantity;
 
             productDiv.innerHTML = `
-                <hr>
                 <img id='imgcart' width=25% height=25% src='${item.image}' alt='${item.name}' />
                 <h5 id='namecart'>${item.name}</h5>
                 <p id='pricecart'>Precio: ${formatPrice(itemPrice)}</p>
