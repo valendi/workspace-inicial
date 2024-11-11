@@ -567,10 +567,6 @@ button#pagoCarrito:hover {
   padding: 0.2em 0.5em;
 }
 
-*{
-  border: 1px solid red;
-}
-
 /* Solo para la sección de compra */
 .container-compra {
   display: flex;
