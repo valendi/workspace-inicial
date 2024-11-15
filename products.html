@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -17,14 +18,8 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
     <div class="container">
-      <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
@@ -39,15 +34,16 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
               <span id="displayUsername"></span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li>
-                <a class="dropdown-item" href="cart.html">
-                Mi carrito <span id="cart-badge" class="badge bg-danger">0</span>
+                <a class="dropdown-item" href="cart-paso-1.html">
+                  Mi carrito <span id="cart-badge" class="badge bg-danger">0</span>
                 </a>
-            </li>
+              </li>
               <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
               <li><a id="cerrar" class="dropdown-item" href="#">Cerrar sesión</a></li>
             </ul>
@@ -59,45 +55,40 @@
   <br>
   <div class="container">
     <!-- Contenedor para cuadro de busqueda -->
-    <input
-    type="search" 
-    id="searchInput" 
-    placeholder="Search..." 
-    size="5" name="q" 
-    class="form-control">
+    <input type="search" id="searchInput" placeholder="Search..." size="5" name="q" class="form-control">
   </div>
   <br>
   <div class="d-flex justify-content-end mb-3">
     <span class="me-2">Precio</span>
-  <!-- Filtros de rango de precio -->
-  <div class="d-flex align-items-center me-3">
-    <div class="input-group input-group-sm" style="width: 100px;">
-      <input type="number" id="minPrecio" class="form-control" placeholder="Min" />
+    <!-- Filtros de rango de precio -->
+    <div class="d-flex align-items-center me-3">
+      <div class="input-group input-group-sm" style="width: 100px;">
+        <input type="number" id="minPrecio" class="form-control" placeholder="Min" />
+      </div>
+      <div class="input-group input-group-sm ms-2" style="width: 100px;">
+        <input type="number" id="maxPrecio" class="form-control" placeholder="Max" />
+      </div>
+      <button id="filterBtn" class="btn btn-primary btn-sm ms-2">Filtrar</button>
     </div>
-    <div class="input-group input-group-sm ms-2" style="width: 100px;">
-      <input type="number" id="maxPrecio" class="form-control" placeholder="Max" />
+
+    <!-- Botones de ordenamiento con íconos -->
+    <div class="btn-group btn-group-sm" role="group" aria-label="Ordenar">
+      <input type="radio" class="btn-check" name="options" id="sortAsc" />
+      <label class="btn btn-light" for="sortAsc">
+        <i class="fas fa-sort-amount-down-alt"></i>
+      </label>
+
+      <input type="radio" class="btn-check" name="options" id="sortDesc" />
+      <label class="btn btn-light" for="sortDesc">
+        <i class="fas fa-sort-amount-up"></i>
+      </label>
+
+      <input type="radio" class="btn-check" name="options" id="sortByCount" checked />
+      <label class="btn btn-light" for="sortByCount">
+        <i class="fa fa-fire"></i>
+      </label>
     </div>
-    <button id="filterBtn" class="btn btn-primary btn-sm ms-2">Filtrar</button>
   </div>
-
-  <!-- Botones de ordenamiento con íconos -->
-  <div class="btn-group btn-group-sm" role="group" aria-label="Ordenar">
-    <input type="radio" class="btn-check" name="options" id="sortAsc" />
-    <label class="btn btn-light" for="sortAsc">
-      <i class="fas fa-sort-amount-down-alt"></i>
-    </label>          
-
-    <input type="radio" class="btn-check" name="options" id="sortDesc" />
-    <label class="btn btn-light" for="sortDesc">
-      <i class="fas fa-sort-amount-up"></i>
-    </label>
-
-    <input type="radio" class="btn-check" name="options" id="sortByCount" checked />
-    <label class="btn btn-light" for="sortByCount">
-      <i class="fa fa-fire"></i>
-    </label>
-  </div>
-</div>
   <main class="pb-5 container">
     <br />
     <br />
