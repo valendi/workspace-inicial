@@ -254,40 +254,38 @@ document.addEventListener("DOMContentLoaded", () => {
         location.href = "cart-paso-3.html"; // Redirigir a la página de pago
     });
 
+    // VISUALIZACION DEL PASO 3
+    if (document.getElementById("botonPaso3") != null) {
+        const metodoPagoTarjeta = document.getElementById("metodoPagoTarjeta");
+        const metodoPagoTransferencia = document.getElementById("metodoPagoTransferencia");
+        const formularioTarjeta = document.getElementById("formularioTarjeta");
+        const formularioTransferencia = document.getElementById("formularioTransferencia");
+
+        // Mostrar el formulario de pago adecuado según el método seleccionado
+        metodoPagoTarjeta.addEventListener("change", () => {
+            formularioTarjeta.style.display = metodoPagoTarjeta.checked ? "block" : "none";
+            formularioTransferencia.style.display = !metodoPagoTarjeta.checked ? "block" : "none";
+        });
+
+        metodoPagoTransferencia.addEventListener("change", () => {
+            formularioTarjeta.style.display = !metodoPagoTransferencia.checked ? "block" : "none";
+            formularioTransferencia.style.display = metodoPagoTransferencia.checked ? "block" : "none";
+        });
+
+        // Activar por defecto la transferencia (ya está en checked en el HTML)
+        if (metodoPagoTransferencia.checked) {
+            formularioTarjeta.style.display = "none";
+            formularioTransferencia.style.display = "block";
+        }
+    }
+
     // LOGICA DEL PASO 3
     document.getElementById("botonPaso3")?.addEventListener("click", function (event) {
         event.preventDefault();
 
-        //Pagar//
-        const tarjetaRadio = document.getElementById("flexRadioDefault1");
-        const transferenciaRadio = document.getElementById("flexRadioDefault2");
-        const tarjetaForm = document.getElementById("tarjetaForm");
-        const transferenciaForm = document.getElementById("transferenciaForm");
-
-        // Mostrar el formulario de pago adecuado según el método seleccionado
-        tarjetaRadio.addEventListener("change", function () {
-            if (tarjetaRadio.checked) {
-                tarjetaForm.style.display = "block";
-                transferenciaForm.style.display = "none";
-            }
-        });
-
-        transferenciaRadio.addEventListener("change", function () {
-            if (transferenciaRadio.checked) {
-                tarjetaForm.style.display = "none";
-                transferenciaForm.style.display = "block";
-            }
-        });
-
-        // Activar por defecto la transferencia (ya está en checked en el HTML)
-        if (transferenciaRadio.checked) {
-            tarjetaForm.style.display = "none";
-            transferenciaForm.style.display = "block";
-        }
-
         const metodoPagoSeleccionado = document.querySelector('input[name="metodoPago"]:checked').id;
 
-        if (metodoPagoSeleccionado === "flexRadioDefault1") {
+        if (metodoPagoSeleccionado === "metodoPagoTarjeta") {
             // Si se selecciona tarjeta
             const nombreTitular = document.getElementById("nombreTitular").value.trim();
             const correoElectronico = document.getElementById("correoElectronico").value.trim();
@@ -344,11 +342,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 console.log("Carrito vacío");
             }, 50); // Ejecutar después de 50ms para liberar el hilo
-        } else if (metodoPagoSeleccionado === "flexRadioDefault2") {
+        } else if (metodoPagoSeleccionado === "metodoPagoTransferencia") {
             // Si se selecciona transferencia
+
             alert(
                 "Excelente solo queda un paso más. Por favor, realiza el pago mediante transferencia y envíanos el comprobante para disfrutar pronto de tu compra."
             );
         }
     });
 });
+
+//Agregar costo de envio
+document.addEventListener("DOMContentLoaded", () => {});
