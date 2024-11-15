@@ -522,7 +522,7 @@ body.dark-mode .button-container button {
   color: #ffffff;
 }
 
-button#pagoCarrito {
+#botonPaso1, #botonPaso2, #botonPaso3 {
   color: white;
   background-color: black;
   border-radius: 20px;
