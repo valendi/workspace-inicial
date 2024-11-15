@@ -34,7 +34,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li>
-                                <a class="dropdown-item" href="cart.html">
+                                <a class="dropdown-item" href="cart-paso-1.html">
                                     Mi carrito <span id="cart-badge" class="badge bg-danger">0</span>
                                 </a>
                             </li>
@@ -64,10 +64,10 @@
                         aria-valuemin="0" aria-valuemax="100" style="width: 33.3%">
                         <div class="progress-bar progress-bar-striped progress-bar-animated">Paso 2</div>
                     </div>
-                    <div class="progress" role="progressbar" aria-label="Segment one" aria-valuenow="15" aria-valuemin="0"
-                    aria-valuemax="100" style="width: 33.3%">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated">Paso 3</div>
-                </div>
+                    <div class="progress" role="progressbar" aria-label="Segment one" aria-valuenow="15"
+                        aria-valuemin="0" aria-valuemax="100" style="width: 33.3%">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated">Paso 3</div>
+                    </div>
                 </div>
             </div>
             <br>
@@ -87,58 +87,65 @@
                             </div>
 
                             <p>Complete los datos</p>
-                        <br>
-                        <div id="tarjetaForm" style="display: none;">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="inputGroup-sizing-default">Nombre del titular</span>
-                                <input type="text" class="form-control" aria-label="Sizing example input"
-                                    aria-describedby="inputGroup-sizing-default" id="nombreTitular">
-                            </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="inputGroup-sizing-default">Correo electrónico</span>
-                                <input type="email" class="form-control" aria-label="Sizing example input"
-                                    aria-describedby="inputGroup-sizing-default" id="correoElectronico">
-                            </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="inputGroup-sizing-default">Información de tarjeta</span>
-                                <input type="text" class="form-control" aria-label="Sizing example input"
-                                    aria-describedby="inputGroup-sizing-default" id="informacionTarjeta">
-                            </div>
-                            <div class="mb-3">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="input-group">
-                                            <span class="input-group-text">MM AA</span>
-                                            <input type="text" class="form-control" aria-label="MM AA" aria-describedby="inputGroup-sizing-default" id="fechaVencimiento">
+                            <br>
+                            <div id="tarjetaForm" style="display: none;">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Nombre del
+                                        titular</span>
+                                    <input type="text" class="form-control" aria-label="Sizing example input"
+                                        aria-describedby="inputGroup-sizing-default" id="nombreTitular">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Correo
+                                        electrónico</span>
+                                    <input type="email" class="form-control" aria-label="Sizing example input"
+                                        aria-describedby="inputGroup-sizing-default" id="correoElectronico">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Información de
+                                        tarjeta</span>
+                                    <input type="text" class="form-control" aria-label="Sizing example input"
+                                        aria-describedby="inputGroup-sizing-default" id="informacionTarjeta">
+                                </div>
+                                <div class="mb-3">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="input-group">
+                                                <span class="input-group-text">MM AA</span>
+                                                <input type="text" class="form-control" aria-label="MM AA"
+                                                    aria-describedby="inputGroup-sizing-default" id="fechaVencimiento">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="input-group">
-                                            <span class="input-group-text">CVC</span>
-                                            <input type="text" class="form-control" aria-label="CVC" aria-describedby="inputGroup-sizing-default" id="cvc">
+                                        <div class="col-6">
+                                            <div class="input-group">
+                                                <span class="input-group-text">CVC</span>
+                                                <input type="text" class="form-control" aria-label="CVC"
+                                                    aria-describedby="inputGroup-sizing-default" id="cvc">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <hr>
+                            <hr>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="metodoPago" id="flexRadioDefault2" checked>
+                                <input class="form-check-input" type="radio" name="metodoPago" id="flexRadioDefault2"
+                                    checked>
                                 <label class="form-check-label" for="flexRadioDefault2">
                                     Transferencia bancaria
                                 </label>
-                            </div> 
+                            </div>
 
                             <div id="transferenciaForm" style="display: none;">
                                 <p>- ITAÚ - 555666 Fernando Quevedo.</p>
                                 <p>- BROU - 99900002 Maria De Los Angeles.</p>
-                                <p>Enviar captura del comprobante al contacto: +598 99 000 111 (dentro de las 48 horas posteriores luego de finalizado el pago).</p>
+                                <p>Enviar captura del comprobante al contacto: +598 99 000 111 (dentro de las 48 horas
+                                    posteriores luego de finalizado el pago).</p>
                             </div>
                         </form>
                         <br>
                         <hr>
-                        <button id="finalizarCompra" class="btn btn-success">Finalizar Compra</button>
-                        <br>         
+                        <button id="botonPaso3" class="btn btn-success">Finalizar Compra</button>
+                        <br>
                     </div>
                     <div class="col-md-6 col-12 d-flex flex-column" id="contResumen">
                         <div id="resumen">

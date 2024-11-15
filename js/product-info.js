@@ -226,7 +226,7 @@ buyButton.addEventListener("click", function () {
 
       // Guarda el carrito actualizado en localStorage
       localStorage.setItem("itemsCarrito", JSON.stringify(itemsCarrito));
-      window.location.href = "cart.html"; // Redirige al carrito
+      window.location.href = "cart-paso-1.html"; // Redirige al carrito
     })
     .catch(error => console.error("Error al cargar los datos del producto: ", error));
 });
