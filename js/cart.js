@@ -240,32 +240,49 @@ function validacionesPaso3(event) {
 }
 
 function cargaDatosPaso1() {
-    if(document.getElementById("botonPaso1") != null){
-        // Calcular el total y actualizar texto en HTML
-        const costoSubtotalProductosElemento = parseFloat(localStorage.getItem("costoSubtotal"));
-        const costoTotalElemento = document.getElementById("costoTotal");
 
-        // Calcular el total con costo de envío
-        recalcularTotalPaso1();  // Llamar a una función para calcular el total correctamente
-    }
+    // Calcular el total y actualizar texto en HTML
+    const costoSubtotalProductosElemento = parseFloat(localStorage.getItem("costoSubtotal"));
+    const costoTotalElemento = document.getElementById("costoTotal");
+
+    recalcularTotal();  // Llamar a una función para calcular el total correctamente
 }
 
-function recalcularTotalPaso1() {
-    const costoSubtotalProductos = parseFloat(localStorage.getItem("costoSubtotal"));
-    const costoEnvio = parseFloat(localStorage.getItem("costoEnvio"));
-
-    if (isNaN(costoSubtotalProductos) || isNaN(costoEnvio)) {
-        return; // No calcular si no hay datos disponibles
-    }
+function recalcularTotal() {
+    const costoSubtotalProductos = parseFloat(localStorage.getItem("costoSubtotal")) || 0;
+    const costoEnvio = parseFloat(localStorage.getItem("costoEnvio")) || 0;
 
     const costoTotal = costoSubtotalProductos + costoEnvio;
-    localStorage.setItem("costoTotal", costoTotal);  // Guardar el total en localStorage
+    localStorage.setItem("costoTotal", costoTotal);
 
-    // Actualizar el total en el DOM
     const costoTotalElemento = document.getElementById("costoTotal");
     if (costoTotalElemento) {
         costoTotalElemento.innerText = `Total: ${formateoPrecioUruguayo(costoTotal)}`;
     }
+}
+
+
+
+function calcularCostoEnvio() {
+    const envioPremium = document.getElementById("envioPremium");
+    const envioExpress = document.getElementById("envioExpress");
+    const envioStandard = document.getElementById("envioStandard");
+
+    // Recuperar valor previo de localStorage si ya existe
+    let costoEnvio = parseFloat(localStorage.getItem("costoEnvio")) || 0;
+
+    // Verificar si hay selección de envío activa
+    if (envioPremium && envioPremium.checked) {
+        costoEnvio = parseFloat(localStorage.getItem("costoSubtotal")) * 0.15;
+    } else if (envioExpress && envioExpress.checked) {
+        costoEnvio = parseFloat(localStorage.getItem("costoSubtotal")) * 0.07;
+    } else if (envioStandard && envioStandard.checked) {
+        costoEnvio = parseFloat(localStorage.getItem("costoSubtotal")) * 0.05;
+    }
+
+    // Actualizar el valor en localStorage y retornarlo
+    localStorage.setItem("costoEnvio", costoEnvio);
+    return costoEnvio;
 }
 
 function cargaDatosPaso2() {
@@ -297,15 +314,15 @@ function cargaDatosPaso2() {
             const itemSubtotal = itemPrice * itemQuantity;
 
             productDiv.innerHTML = `<img id='imgcart' width=25% height=25% src='${item.image}' alt='${item.name}' />
-            <h5 id='namecart'>${item.name}</h5>
-            <p id='pricecart'>Precio: ${formateoPrecioUruguayo(itemPrice)}</p>
-            <p>
-                Cantidad: 
-                <input type='number' class='quantity-input' value='${itemQuantity}' min='1' data-price='${itemPrice}' />
-            </p>
-            <p id='subtotal-${item.id}'>Subtotal: ${formateoPrecioUruguayo(itemSubtotal)}</p>
-            <button class='remove-button' data-id='${item.id}'>Eliminar</button>
-            <hr>`;
+                <h5 id='namecart'>${item.name}</h5>
+                <p id='pricecart'>Precio: ${formateoPrecioUruguayo(itemPrice)}</p>
+                <p>
+                    Cantidad: 
+                    <input type='number' class='quantity-input' value='${itemQuantity}' min='1' data-price='${itemPrice}' />
+                </p>
+                <p id='subtotal-${item.id}'>Subtotal: ${formateoPrecioUruguayo(itemSubtotal)}</p>
+                <button class='remove-button' data-id='${item.id}'>Eliminar</button>
+                <hr>`;
             itemsCarritoContenedor.appendChild(productDiv);
 
             subtotal += itemSubtotal;
@@ -318,6 +335,10 @@ function cargaDatosPaso2() {
                 const newSubtotal = price * newQuantity;
                 document.getElementById(`subtotal-${item.id}`).innerText = `Subtotal: ${formateoPrecioUruguayo(newSubtotal)}`;
 
+                // Actualizar la cantidad en el localStorage
+                item.quantity = newQuantity;
+                localStorage.setItem("itemsCarrito", JSON.stringify(itemsCarrito));
+
                 // Recalcular el subtotal total
                 subtotal = 0; // Reiniciar subtotal
                 document.querySelectorAll(".quantity-input").forEach((input) => {
@@ -327,7 +348,7 @@ function cargaDatosPaso2() {
                 costoSubtotalElemento.innerText = `Subtotal: ${formateoPrecioUruguayo(subtotal)}`;
                 localStorage.setItem("costoSubtotal", subtotal);
                 recalculoEnvioPaso2(); // Recalcular el costo de envío
-                recalcularTotalPaso1(); // Recalcular el total (incluyendo el costo de envío)
+                recalcularTotal(); // Recalcular el total (incluyendo el costo de envío)
             });
 
             // Agregar evento para eliminar producto
@@ -343,58 +364,29 @@ function cargaDatosPaso2() {
         costoSubtotalElemento.innerText = `Subtotal: ${formateoPrecioUruguayo(subtotal)}`; // Muestra el subtotal
     }
 
-    // Guardo subtotal
+    // Guardar subtotal
     localStorage.setItem("costoSubtotal", subtotal);
 
     // Recalcular el total después de los cambios
-    recalcularTotalPaso1(); // Llamada para calcular el total correctamente
+    recalcularTotal(); // Llamada para calcular el total correctamente
 
     // Evento para escuchar el cambio en la selección de tipo de envío
     const radioButtonsEnvio = document.querySelectorAll('input[name="envio"]');
     radioButtonsEnvio.forEach((radio) => {
         radio.addEventListener("change", () => {
             recalculoEnvioPaso2(); // Recalcular el costo de envío al cambiar la selección
-            recalcularTotalPaso1(); // Recalcular el total después de cambiar el envío
+            recalcularTotal(); // Recalcular el total después de cambiar el envío
         });
     });
 }
 
 function recalculoEnvioPaso2() {
-    // Si es el paso 2, calcular envio
     if (document.getElementById("botonPaso2") != null) {
-        const envioPremium = document.getElementById("envioPremium");
-        const envioExpress = document.getElementById("envioExpress");
-        const envioStandard = document.getElementById("envioStandard");
-
-        let envioSeleccionado;
-        let tasaEnvio;
-
-        if (envioPremium && envioPremium.checked) {
-            envioSeleccionado = "Premium";
-            tasaEnvio = 0.15; // 15% del subtotal
-        } else if (envioExpress && envioExpress.checked) {
-            envioSeleccionado = "Express";
-            tasaEnvio = 0.07; // 7% del subtotal
-        } else if (envioStandard && envioStandard.checked) {
-            envioSeleccionado = "Standard";
-            tasaEnvio = 0.05; // 5% del subtotal
-        } else {
-            envioSeleccionado = "Debe seleccionar un envio";
-            tasaEnvio = 0;
-        }
-
-        // Calculo de envio y actualizar texto en HTML
-        const costoSubtotalProductos = parseFloat(localStorage.getItem("costoSubtotal"));
-        const costoEnvio = costoSubtotalProductos * tasaEnvio;
-        localStorage.setItem("costoEnvio", costoEnvio);
+        const costoEnvio = calcularCostoEnvio();
         const costoEnvioElemento = document.getElementById("costoEnvio");
-        costoEnvioElemento.textContent = `Envío: ${formateoPrecioUruguayo(costoEnvio)}`;
 
-        // Calcular de total y actualizar texto en HTML
-        const costoTotal = costoSubtotalProductos + costoEnvio;
-        localStorage.setItem("costoTotal", costoTotal);
-        const costoTotalElemento = document.getElementById("costoTotal");
-        costoTotalElemento.innerText = `Total: ${formateoPrecioUruguayo(costoTotal)}`;
+        costoEnvioElemento.textContent = `Envío: ${formateoPrecioUruguayo(costoEnvio)}`;
+        recalcularTotal(); // Actualizar el total con el costo de envío
     }
 }
 
@@ -406,7 +398,7 @@ function cargaDatosPaso3() {
         const formularioTarjeta = document.getElementById("formularioTarjeta");
         const formularioTransferencia = document.getElementById("formularioTransferencia");
 
-        // Mostrar el formulario de pago adecuado según el método seleccionado
+        // Mostrar u ocultar formularios de métodos de pago
         metodoPagoTarjeta.addEventListener("change", () => {
             formularioTarjeta.style.display = metodoPagoTarjeta.checked ? "block" : "none";
             formularioTransferencia.style.display = !metodoPagoTarjeta.checked ? "block" : "none";
@@ -417,21 +409,33 @@ function cargaDatosPaso3() {
             formularioTransferencia.style.display = metodoPagoTransferencia.checked ? "block" : "none";
         });
 
-        // Activar por defecto la transferencia (ya está en checked en el HTML)
         if (metodoPagoTransferencia.checked) {
             formularioTarjeta.style.display = "none";
             formularioTransferencia.style.display = "block";
         }
 
-        const costoEnvio = parseFloat(localStorage.getItem("costoEnvio"));
+        // Recuperar y mostrar el costo de envío almacenado
+        const costoEnvio = parseFloat(localStorage.getItem("costoEnvio")) || 0;
         const costoEnvioElemento = document.getElementById("costoEnvio");
         costoEnvioElemento.innerText = `Envío: ${formateoPrecioUruguayo(costoEnvio)}`;
 
-        const costoTotal = parseFloat(localStorage.getItem("costoTotal"));
+        // Mostrar el costo total
+        const costoTotal = parseFloat(localStorage.getItem("costoTotal")) || 0;
         const costoTotalElemento = document.getElementById("costoTotal");
         costoTotalElemento.innerText = `Total: ${formateoPrecioUruguayo(costoTotal)}`;
+
+        // Escuchar cambios en cantidades y recalcular el total
+        const quantityInputs = document.querySelectorAll(".quantity-input");
+        quantityInputs.forEach((input) => {
+            input.addEventListener("input", () => {
+                recalcularTotal(); // Recalcular el total dinámicamente
+            });
+        });
     }
 }
+
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
     // Verificaciones de carga de pagina
