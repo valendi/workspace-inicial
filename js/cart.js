@@ -239,6 +239,35 @@ function validacionesPaso3(event) {
     }
 }
 
+function cargaDatosPaso1() {
+    if(document.getElementById("botonPaso1") != null){
+        // Calcular el total y actualizar texto en HTML
+        const costoSubtotalProductosElemento = parseFloat(localStorage.getItem("costoSubtotal"));
+        const costoTotalElemento = document.getElementById("costoTotal");
+
+        // Calcular el total con costo de envío
+        recalcularTotalPaso1();  // Llamar a una función para calcular el total correctamente
+    }
+}
+
+function recalcularTotalPaso1() {
+    const costoSubtotalProductos = parseFloat(localStorage.getItem("costoSubtotal"));
+    const costoEnvio = parseFloat(localStorage.getItem("costoEnvio"));
+
+    if (isNaN(costoSubtotalProductos) || isNaN(costoEnvio)) {
+        return; // No calcular si no hay datos disponibles
+    }
+
+    const costoTotal = costoSubtotalProductos + costoEnvio;
+    localStorage.setItem("costoTotal", costoTotal);  // Guardar el total en localStorage
+
+    // Actualizar el total en el DOM
+    const costoTotalElemento = document.getElementById("costoTotal");
+    if (costoTotalElemento) {
+        costoTotalElemento.innerText = `Total: ${formateoPrecioUruguayo(costoTotal)}`;
+    }
+}
+
 function cargaDatosPaso2() {
     const itemsCarritoContenedor = document.getElementById("productosCarrito");
     const carritoVacioElemento = document.getElementById("carritoVacio");
@@ -298,6 +327,7 @@ function cargaDatosPaso2() {
                 costoSubtotalElemento.innerText = `Subtotal: ${formateoPrecioUruguayo(subtotal)}`;
                 localStorage.setItem("costoSubtotal", subtotal);
                 recalculoEnvioPaso2(); // Recalcular el costo de envío
+                recalcularTotalPaso1(); // Recalcular el total (incluyendo el costo de envío)
             });
 
             // Agregar evento para eliminar producto
@@ -316,11 +346,15 @@ function cargaDatosPaso2() {
     // Guardo subtotal
     localStorage.setItem("costoSubtotal", subtotal);
 
+    // Recalcular el total después de los cambios
+    recalcularTotalPaso1(); // Llamada para calcular el total correctamente
+
     // Evento para escuchar el cambio en la selección de tipo de envío
     const radioButtonsEnvio = document.querySelectorAll('input[name="envio"]');
     radioButtonsEnvio.forEach((radio) => {
         radio.addEventListener("change", () => {
             recalculoEnvioPaso2(); // Recalcular el costo de envío al cambiar la selección
+            recalcularTotalPaso1(); // Recalcular el total después de cambiar el envío
         });
     });
 }
@@ -364,6 +398,7 @@ function recalculoEnvioPaso2() {
     }
 }
 
+
 function cargaDatosPaso3() {
     if (document.getElementById("botonPaso3") != null) {
         const metodoPagoTarjeta = document.getElementById("metodoPagoTarjeta");
@@ -405,6 +440,7 @@ document.addEventListener("DOMContentLoaded", () => {
     actualizarBadgeCarrito();
 
     // Carga de Datos del paso previo
+    cargaDatosPaso1()
     cargaDatosPaso2();
     cargaDatosPaso3();
 
@@ -418,4 +454,5 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("envioPremium")?.addEventListener("change", recalculoEnvioPaso2);
     document.getElementById("envioExpress")?.addEventListener("change", recalculoEnvioPaso2);
     document.getElementById("envioStandard")?.addEventListener("change", recalculoEnvioPaso2);
+
 });
