@@ -1,3 +1,55 @@
+function showAlert(message, type = "danger", autoDismiss = true, duration = 5000) {
+    // Crear el elemento de alerta
+    const alertContainer = document.getElementById('alert-container');
+    const alertElement = document.createElement('div');
+
+    alertElement.className = `alert alert-${type} alert-dismissible fade show`;
+    alertElement.role = "alert";
+    alertElement.innerHTML = `
+        <strong>${type === "success" ? "¡Éxito!" : "¡Error!"}</strong> ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+
+    // Agregar la alerta al contenedor
+    alertContainer.appendChild(alertElement);
+
+    // Configurar el autodescanso
+    if (autoDismiss) {
+        setTimeout(() => {
+            const alert = bootstrap.Alert.getOrCreateInstance(alertElement);
+            alert.close();
+        }, duration);
+    }
+}
+
+function showCustomAlert(heading, message, type = "success", autoDismiss = true, duration = 5000) {
+    // Contenedor de las alertas
+    const alertContainer = document.getElementById('alert-container');
+
+    // Crear la alerta
+    const alertElement = document.createElement('div');
+    alertElement.className = `alert alert-${type} alert-dismissible fade show`;
+    alertElement.role = "alert";
+    alertElement.innerHTML = `
+        <h4 class="alert-heading">${heading}</h4>
+        <p>${message}</p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+
+    // Agregar la alerta al contenedor
+    alertContainer.appendChild(alertElement);
+
+    // Cierre automático si se especifica
+    if (autoDismiss) {
+        setTimeout(() => {
+            const alert = bootstrap.Alert.getOrCreateInstance(alertElement);
+            alert.close();
+        }, duration);
+    }
+}
+
+
+
 function actualizarBadgeCarrito() {
     const itemsCarrito = JSON.parse(localStorage.getItem("itemsCarrito")) || [];
     const totalProductos = itemsCarrito.reduce((total, item) => total + item.quantity, 0);
@@ -48,7 +100,7 @@ function validacionesPaso1(event) {
 
     const cantidadProductos = JSON.parse(localStorage.getItem("itemsCarrito")) || [];
     if (cantidadProductos.length === 0 || cantidadProductos.some((producto) => producto.cantidad <= 0)) {
-        alert("Debe agregar productos al carrito y asegurarse de que la cantidad sea mayor a 0.");
+        showAlert("Debe agregar productos al carrito y asegurarse de que la cantidad sea mayor a 0.");
         return;
     }
 
@@ -129,14 +181,14 @@ function validacionesPaso2(event) {
     // 2. Validar que se haya seleccionado un tipo de envío
     const envioSeleccionado = Array.from(selectEnvio).some((input) => input.checked);
     if (!envioSeleccionado) {
-        alert("Debe seleccionar un tipo de envío.");
+        showAlert("Debe seleccionar un tipo de envío.");
         return;
     }
 
     // 3. Validar que el departamento esté seleccionado
     const departamentoSeleccionado = selectDepartamento.value;
     if (departamentoSeleccionado === "" || departamentoSeleccionado === "Seleccione una opcion...") {
-        alert("Debe seleccionar un departamento.");
+        showAlert("Debe seleccionar un departamento.");
         return;
     }
 
@@ -147,20 +199,20 @@ function validacionesPaso2(event) {
 
     // Validación de Localidad
     if (!localidad) {
-        alert("Debe completar el campo Localidad.");
+        showAlert("Debe completar el campo Localidad.");
         return;
     }
 
     // Validación de Calle y Número: Verificar que el campo contenga texto y al menos un número
     const regexCalleNumero = /[A-Za-z\s]+[0-9]+/; // Al menos un número en la calle
     if (!calle || !regexCalleNumero.test(calle)) {
-        alert('Debe completar el campo Calle y número con un formato válido (ejemplo: "Calle Falsa 123").');
+        showAlert('Debe completar el campo Calle y número con un formato válido (ejemplo: "Calle Falsa 123").');
         return;
     }
 
     // Validación de Esquina
     if (esquinaValue === "") {
-        alert("Debe completar el campo Esquina.");
+        showAlert("Debe completar el campo Esquina.");
         return;
     }
 
@@ -183,19 +235,19 @@ function validacionesPaso3(event) {
 
         // Verificar que todos los campos de la tarjeta estén completos
         if (!nombreTitular || !correoElectronico || !informacionTarjeta || !fechaVencimiento || !cvc) {
-            alert("Debe completar todos los campos de la tarjeta de crédito.");
+            showAlert("Debe completar todos los campos de la tarjeta de crédito.");
             return;
         }
 
         // Validación del correo electrónico (debe contener '@')
         if (!/\S+@\S+\.\S+/.test(correoElectronico)) {
-            alert("El correo electrónico debe tener el formato adecuado (ejemplo@dominio.com).");
+            showAlert("El correo electrónico debe tener el formato adecuado (ejemplo@dominio.com).");
             return;
         }
 
         // Validación de número de tarjeta (16 dígitos numéricos)
         if (!/^\d{16}$/.test(informacionTarjeta.replace(/\s+/g, ""))) {
-            alert("El número de tarjeta debe contener 16 dígitos numéricos.");
+            showAlert("El número de tarjeta debe contener 16 dígitos numéricos.");
             return;
         }
 
@@ -203,18 +255,22 @@ function validacionesPaso3(event) {
         // Los primeros dos dígitos (MM) deben estar entre 01 y 12
         // Los últimos dos dígitos (AA) deben ser cualquier número entre 00 y 99
         if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(fechaVencimiento)) {
-            alert("La fecha de vencimiento debe tener el formato MM/AA (mes entre 01 y 12, año de 2 dígitos).");
+            showAlert("La fecha de vencimiento debe tener el formato MM/AA (mes entre 01 y 12, año de 2 dígitos).");
             return;
         }
 
         // Validación de CVC (3 dígitos sin espacios y solo números)
         if (!/^\d{3}$/.test(cvc)) {
-            alert("El CVC debe contener exactamente 3 dígitos numéricos, sin espacios.");
+            showAlert("El CVC debe contener exactamente 3 dígitos numéricos, sin espacios.");
             return;
         }
 
         // Si todo es válido, procesar la compra
-        alert("Excelente, tu compra ha sido realizada con éxito. Esperamos que disfrutes mucho y agradecemos la confianza en nosotros.");
+        showCustomAlert(
+            "¡Éxito!",
+            "Excelente, tu compra ha sido realizada con éxito. Esperamos que disfrutes mucho y agradecemos la confianza en nosotros.",
+            "success"
+        );
 
         console.log("Vaciar carrito...");
 
@@ -233,10 +289,58 @@ function validacionesPaso3(event) {
     } else if (metodoPagoSeleccionado === "metodoPagoTransferencia") {
         // Si se selecciona transferencia
 
-        alert(
-            "Excelente solo queda un paso más. Por favor, realiza el pago mediante transferencia y envíanos el comprobante para disfrutar pronto de tu compra."
+        showCustomAlert(
+            "¡Éxito!",
+            "Excelente solo queda un paso más. Por favor, realiza el pago mediante transferencia y envíanos el comprobante para disfrutar pronto de tu compra.",
+            "success"
         );
     }
+}
+
+function cargaDatosPaso1() {
+
+    // Calcular el total y actualizar texto en HTML
+    const costoSubtotalProductosElemento = parseFloat(localStorage.getItem("costoSubtotal"));
+    const costoTotalElemento = document.getElementById("costoTotal");
+
+    recalcularTotal();  // Llamar a una función para calcular el total correctamente
+}
+
+function recalcularTotal() {
+    const costoSubtotalProductos = parseFloat(localStorage.getItem("costoSubtotal")) || 0;
+    const costoEnvio = parseFloat(localStorage.getItem("costoEnvio")) || 0;
+
+    const costoTotal = costoSubtotalProductos + costoEnvio;
+    localStorage.setItem("costoTotal", costoTotal);
+
+    const costoTotalElemento = document.getElementById("costoTotal");
+    if (costoTotalElemento) {
+        costoTotalElemento.innerText = `Total: ${formateoPrecioUruguayo(costoTotal)}`;
+    }
+}
+
+
+
+function calcularCostoEnvio() {
+    const envioPremium = document.getElementById("envioPremium");
+    const envioExpress = document.getElementById("envioExpress");
+    const envioStandard = document.getElementById("envioStandard");
+
+    // Recuperar valor previo de localStorage si ya existe
+    let costoEnvio = parseFloat(localStorage.getItem("costoEnvio")) || 0;
+
+    // Verificar si hay selección de envío activa
+    if (envioPremium && envioPremium.checked) {
+        costoEnvio = parseFloat(localStorage.getItem("costoSubtotal")) * 0.15;
+    } else if (envioExpress && envioExpress.checked) {
+        costoEnvio = parseFloat(localStorage.getItem("costoSubtotal")) * 0.07;
+    } else if (envioStandard && envioStandard.checked) {
+        costoEnvio = parseFloat(localStorage.getItem("costoSubtotal")) * 0.05;
+    }
+
+    // Actualizar el valor en localStorage y retornarlo
+    localStorage.setItem("costoEnvio", costoEnvio);
+    return costoEnvio;
 }
 
 function cargaDatosPaso2() {
@@ -268,15 +372,15 @@ function cargaDatosPaso2() {
             const itemSubtotal = itemPrice * itemQuantity;
 
             productDiv.innerHTML = `<img id='imgcart' width=25% height=25% src='${item.image}' alt='${item.name}' />
-            <h5 id='namecart'>${item.name}</h5>
-            <p id='pricecart'>Precio: ${formateoPrecioUruguayo(itemPrice)}</p>
-            <p>
-                Cantidad: 
-                <input type='number' class='quantity-input' value='${itemQuantity}' min='1' data-price='${itemPrice}' />
-            </p>
-            <p id='subtotal-${item.id}'>Subtotal: ${formateoPrecioUruguayo(itemSubtotal)}</p>
-            <button class='remove-button' data-id='${item.id}'>Eliminar</button>
-            <hr>`;
+                <h5 id='namecart'>${item.name}</h5>
+                <p id='pricecart'>Precio: ${formateoPrecioUruguayo(itemPrice)}</p>
+                <p>
+                    Cantidad: 
+                    <input type='number' class='quantity-input' value='${itemQuantity}' min='1' data-price='${itemPrice}' />
+                </p>
+                <p id='subtotal-${item.id}'>Subtotal: ${formateoPrecioUruguayo(itemSubtotal)}</p>
+                <button class='remove-button' data-id='${item.id}'>Eliminar</button>
+                <hr>`;
             itemsCarritoContenedor.appendChild(productDiv);
 
             subtotal += itemSubtotal;
@@ -289,6 +393,10 @@ function cargaDatosPaso2() {
                 const newSubtotal = price * newQuantity;
                 document.getElementById(`subtotal-${item.id}`).innerText = `Subtotal: ${formateoPrecioUruguayo(newSubtotal)}`;
 
+                // Actualizar la cantidad en el localStorage
+                item.quantity = newQuantity;
+                localStorage.setItem("itemsCarrito", JSON.stringify(itemsCarrito));
+
                 // Recalcular el subtotal total
                 subtotal = 0; // Reiniciar subtotal
                 document.querySelectorAll(".quantity-input").forEach((input) => {
@@ -298,6 +406,7 @@ function cargaDatosPaso2() {
                 costoSubtotalElemento.innerText = `Subtotal: ${formateoPrecioUruguayo(subtotal)}`;
                 localStorage.setItem("costoSubtotal", subtotal);
                 recalculoEnvioPaso2(); // Recalcular el costo de envío
+                recalcularTotal(); // Recalcular el total (incluyendo el costo de envío)
             });
 
             // Agregar evento para eliminar producto
@@ -313,56 +422,32 @@ function cargaDatosPaso2() {
         costoSubtotalElemento.innerText = `Subtotal: ${formateoPrecioUruguayo(subtotal)}`; // Muestra el subtotal
     }
 
-    // Guardo subtotal
+    // Guardar subtotal
     localStorage.setItem("costoSubtotal", subtotal);
+
+    // Recalcular el total después de los cambios
+    recalcularTotal(); // Llamada para calcular el total correctamente
 
     // Evento para escuchar el cambio en la selección de tipo de envío
     const radioButtonsEnvio = document.querySelectorAll('input[name="envio"]');
     radioButtonsEnvio.forEach((radio) => {
         radio.addEventListener("change", () => {
             recalculoEnvioPaso2(); // Recalcular el costo de envío al cambiar la selección
+            recalcularTotal(); // Recalcular el total después de cambiar el envío
         });
     });
 }
 
 function recalculoEnvioPaso2() {
-    // Si es el paso 2, calcular envio
     if (document.getElementById("botonPaso2") != null) {
-        const envioPremium = document.getElementById("envioPremium");
-        const envioExpress = document.getElementById("envioExpress");
-        const envioStandard = document.getElementById("envioStandard");
-
-        let envioSeleccionado;
-        let tasaEnvio;
-
-        if (envioPremium && envioPremium.checked) {
-            envioSeleccionado = "Premium";
-            tasaEnvio = 0.15; // 15% del subtotal
-        } else if (envioExpress && envioExpress.checked) {
-            envioSeleccionado = "Express";
-            tasaEnvio = 0.07; // 7% del subtotal
-        } else if (envioStandard && envioStandard.checked) {
-            envioSeleccionado = "Standard";
-            tasaEnvio = 0.05; // 5% del subtotal
-        } else {
-            envioSeleccionado = "Debe seleccionar un envio";
-            tasaEnvio = 0;
-        }
-
-        // Calculo de envio y actualizar texto en HTML
-        const costoSubtotalProductos = parseFloat(localStorage.getItem("costoSubtotal"));
-        const costoEnvio = costoSubtotalProductos * tasaEnvio;
-        localStorage.setItem("costoEnvio", costoEnvio);
+        const costoEnvio = calcularCostoEnvio();
         const costoEnvioElemento = document.getElementById("costoEnvio");
-        costoEnvioElemento.textContent = `Envío: ${formateoPrecioUruguayo(costoEnvio)}`;
 
-        // Calcular de total y actualizar texto en HTML
-        const costoTotal = costoSubtotalProductos + costoEnvio;
-        localStorage.setItem("costoTotal", costoTotal);
-        const costoTotalElemento = document.getElementById("costoTotal");
-        costoTotalElemento.innerText = `Total: ${formateoPrecioUruguayo(costoTotal)}`;
+        costoEnvioElemento.textContent = `Envío: ${formateoPrecioUruguayo(costoEnvio)}`;
+        recalcularTotal(); // Actualizar el total con el costo de envío
     }
 }
+
 
 function cargaDatosPaso3() {
     if (document.getElementById("botonPaso3") != null) {
@@ -371,7 +456,7 @@ function cargaDatosPaso3() {
         const formularioTarjeta = document.getElementById("formularioTarjeta");
         const formularioTransferencia = document.getElementById("formularioTransferencia");
 
-        // Mostrar el formulario de pago adecuado según el método seleccionado
+        // Mostrar u ocultar formularios de métodos de pago
         metodoPagoTarjeta.addEventListener("change", () => {
             formularioTarjeta.style.display = metodoPagoTarjeta.checked ? "block" : "none";
             formularioTransferencia.style.display = !metodoPagoTarjeta.checked ? "block" : "none";
@@ -382,21 +467,33 @@ function cargaDatosPaso3() {
             formularioTransferencia.style.display = metodoPagoTransferencia.checked ? "block" : "none";
         });
 
-        // Activar por defecto la transferencia (ya está en checked en el HTML)
         if (metodoPagoTransferencia.checked) {
             formularioTarjeta.style.display = "none";
             formularioTransferencia.style.display = "block";
         }
 
-        const costoEnvio = parseFloat(localStorage.getItem("costoEnvio"));
+        // Recuperar y mostrar el costo de envío almacenado
+        const costoEnvio = parseFloat(localStorage.getItem("costoEnvio")) || 0;
         const costoEnvioElemento = document.getElementById("costoEnvio");
         costoEnvioElemento.innerText = `Envío: ${formateoPrecioUruguayo(costoEnvio)}`;
 
-        const costoTotal = parseFloat(localStorage.getItem("costoTotal"));
+        // Mostrar el costo total
+        const costoTotal = parseFloat(localStorage.getItem("costoTotal")) || 0;
         const costoTotalElemento = document.getElementById("costoTotal");
         costoTotalElemento.innerText = `Total: ${formateoPrecioUruguayo(costoTotal)}`;
+
+        // Escuchar cambios en cantidades y recalcular el total
+        const quantityInputs = document.querySelectorAll(".quantity-input");
+        quantityInputs.forEach((input) => {
+            input.addEventListener("input", () => {
+                recalcularTotal(); // Recalcular el total dinámicamente
+            });
+        });
     }
 }
+
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
     // Verificaciones de carga de pagina
@@ -405,6 +502,7 @@ document.addEventListener("DOMContentLoaded", () => {
     actualizarBadgeCarrito();
 
     // Carga de Datos del paso previo
+    cargaDatosPaso1()
     cargaDatosPaso2();
     cargaDatosPaso3();
 
@@ -418,4 +516,5 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("envioPremium")?.addEventListener("change", recalculoEnvioPaso2);
     document.getElementById("envioExpress")?.addEventListener("change", recalculoEnvioPaso2);
     document.getElementById("envioStandard")?.addEventListener("change", recalculoEnvioPaso2);
+
 });
