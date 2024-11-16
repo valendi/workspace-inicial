@@ -1,3 +1,55 @@
+function showAlert(message, type = "danger", autoDismiss = true, duration = 5000) {
+    // Crear el elemento de alerta
+    const alertContainer = document.getElementById('alert-container');
+    const alertElement = document.createElement('div');
+
+    alertElement.className = `alert alert-${type} alert-dismissible fade show`;
+    alertElement.role = "alert";
+    alertElement.innerHTML = `
+        <strong>${type === "success" ? "¡Éxito!" : "¡Error!"}</strong> ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+
+    // Agregar la alerta al contenedor
+    alertContainer.appendChild(alertElement);
+
+    // Configurar el autodescanso
+    if (autoDismiss) {
+        setTimeout(() => {
+            const alert = bootstrap.Alert.getOrCreateInstance(alertElement);
+            alert.close();
+        }, duration);
+    }
+}
+
+function showCustomAlert(heading, message, type = "success", autoDismiss = true, duration = 5000) {
+    // Contenedor de las alertas
+    const alertContainer = document.getElementById('alert-container');
+
+    // Crear la alerta
+    const alertElement = document.createElement('div');
+    alertElement.className = `alert alert-${type} alert-dismissible fade show`;
+    alertElement.role = "alert";
+    alertElement.innerHTML = `
+        <h4 class="alert-heading">${heading}</h4>
+        <p>${message}</p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+
+    // Agregar la alerta al contenedor
+    alertContainer.appendChild(alertElement);
+
+    // Cierre automático si se especifica
+    if (autoDismiss) {
+        setTimeout(() => {
+            const alert = bootstrap.Alert.getOrCreateInstance(alertElement);
+            alert.close();
+        }, duration);
+    }
+}
+
+
+
 function actualizarBadgeCarrito() {
     const itemsCarrito = JSON.parse(localStorage.getItem("itemsCarrito")) || [];
     const totalProductos = itemsCarrito.reduce((total, item) => total + item.quantity, 0);
@@ -48,7 +100,7 @@ function validacionesPaso1(event) {
 
     const cantidadProductos = JSON.parse(localStorage.getItem("itemsCarrito")) || [];
     if (cantidadProductos.length === 0 || cantidadProductos.some((producto) => producto.cantidad <= 0)) {
-        alert("Debe agregar productos al carrito y asegurarse de que la cantidad sea mayor a 0.");
+        showAlert("Debe agregar productos al carrito y asegurarse de que la cantidad sea mayor a 0.");
         return;
     }
 
@@ -129,14 +181,14 @@ function validacionesPaso2(event) {
     // 2. Validar que se haya seleccionado un tipo de envío
     const envioSeleccionado = Array.from(selectEnvio).some((input) => input.checked);
     if (!envioSeleccionado) {
-        alert("Debe seleccionar un tipo de envío.");
+        showAlert("Debe seleccionar un tipo de envío.");
         return;
     }
 
     // 3. Validar que el departamento esté seleccionado
     const departamentoSeleccionado = selectDepartamento.value;
     if (departamentoSeleccionado === "" || departamentoSeleccionado === "Seleccione una opcion...") {
-        alert("Debe seleccionar un departamento.");
+        showAlert("Debe seleccionar un departamento.");
         return;
     }
 
@@ -147,20 +199,20 @@ function validacionesPaso2(event) {
 
     // Validación de Localidad
     if (!localidad) {
-        alert("Debe completar el campo Localidad.");
+        showAlert("Debe completar el campo Localidad.");
         return;
     }
 
     // Validación de Calle y Número: Verificar que el campo contenga texto y al menos un número
     const regexCalleNumero = /[A-Za-z\s]+[0-9]+/; // Al menos un número en la calle
     if (!calle || !regexCalleNumero.test(calle)) {
-        alert('Debe completar el campo Calle y número con un formato válido (ejemplo: "Calle Falsa 123").');
+        showAlert('Debe completar el campo Calle y número con un formato válido (ejemplo: "Calle Falsa 123").');
         return;
     }
 
     // Validación de Esquina
     if (esquinaValue === "") {
-        alert("Debe completar el campo Esquina.");
+        showAlert("Debe completar el campo Esquina.");
         return;
     }
 
@@ -183,19 +235,19 @@ function validacionesPaso3(event) {
 
         // Verificar que todos los campos de la tarjeta estén completos
         if (!nombreTitular || !correoElectronico || !informacionTarjeta || !fechaVencimiento || !cvc) {
-            alert("Debe completar todos los campos de la tarjeta de crédito.");
+            showAlert("Debe completar todos los campos de la tarjeta de crédito.");
             return;
         }
 
         // Validación del correo electrónico (debe contener '@')
         if (!/\S+@\S+\.\S+/.test(correoElectronico)) {
-            alert("El correo electrónico debe tener el formato adecuado (ejemplo@dominio.com).");
+            showAlert("El correo electrónico debe tener el formato adecuado (ejemplo@dominio.com).");
             return;
         }
 
         // Validación de número de tarjeta (16 dígitos numéricos)
         if (!/^\d{16}$/.test(informacionTarjeta.replace(/\s+/g, ""))) {
-            alert("El número de tarjeta debe contener 16 dígitos numéricos.");
+            showAlert("El número de tarjeta debe contener 16 dígitos numéricos.");
             return;
         }
 
@@ -203,18 +255,22 @@ function validacionesPaso3(event) {
         // Los primeros dos dígitos (MM) deben estar entre 01 y 12
         // Los últimos dos dígitos (AA) deben ser cualquier número entre 00 y 99
         if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(fechaVencimiento)) {
-            alert("La fecha de vencimiento debe tener el formato MM/AA (mes entre 01 y 12, año de 2 dígitos).");
+            showAlert("La fecha de vencimiento debe tener el formato MM/AA (mes entre 01 y 12, año de 2 dígitos).");
             return;
         }
 
         // Validación de CVC (3 dígitos sin espacios y solo números)
         if (!/^\d{3}$/.test(cvc)) {
-            alert("El CVC debe contener exactamente 3 dígitos numéricos, sin espacios.");
+            showAlert("El CVC debe contener exactamente 3 dígitos numéricos, sin espacios.");
             return;
         }
 
         // Si todo es válido, procesar la compra
-        alert("Excelente, tu compra ha sido realizada con éxito. Esperamos que disfrutes mucho y agradecemos la confianza en nosotros.");
+        showCustomAlert(
+            "¡Éxito!",
+            "Excelente, tu compra ha sido realizada con éxito. Esperamos que disfrutes mucho y agradecemos la confianza en nosotros.",
+            "success"
+        );
 
         console.log("Vaciar carrito...");
 
@@ -233,8 +289,10 @@ function validacionesPaso3(event) {
     } else if (metodoPagoSeleccionado === "metodoPagoTransferencia") {
         // Si se selecciona transferencia
 
-        alert(
-            "Excelente solo queda un paso más. Por favor, realiza el pago mediante transferencia y envíanos el comprobante para disfrutar pronto de tu compra."
+        showCustomAlert(
+            "¡Éxito!",
+            "Excelente solo queda un paso más. Por favor, realiza el pago mediante transferencia y envíanos el comprobante para disfrutar pronto de tu compra.",
+            "success"
         );
     }
 }
